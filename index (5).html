@@ -1,0 +1,4104 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>The Wedding Invitation — Strawberry Matcha Garden</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Great+Vibes&family=Jost:wght@300;400;500;600&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet" />
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <style>
+      :root {
+        --soft-pink: #F5EBD8;
+        --strawberry: #C8755B;
+        --strawberry-deep: #9B4937;
+        --blush: #E8B5A2;
+        --blush-soft: #F5EBD8;
+        --soft-green: #ECE6D2;
+        --sage: #A4B89A;
+        --matcha: #B59A70;
+        --matcha-deep: #9B4937;
+        --matcha-darker: #6B3325;
+        --cream: #F5EBD8;
+        --cream-deep: #D9C5A0;
+        --gold: #B59A70;
+        --gold-light: #D9C5A0;
+        --ink: #3a3a3a;
+        --white: #ffffff;
+
+        --font-serif: "Cormorant Garamond", serif;
+        --font-script: "Great Vibes", cursive;
+        --font-sans: "Jost", sans-serif;
+
+        --img-match-1: url("https://file.garden/alY9SkoxwgtjCGxf/Sani%20%26%20Warham/cover.PNG");
+        --img-match-2: url("https://z-cdn-media.chatglm.cn/files/9244c5d3-8c58-438c-a166-8cd89149e5f5.png?auth_key=1885661775-1c0088c0c8ad4d0ba5e80250f969d077-0-29e853c96f54b151fa1f5214508d59ac");
+        --img-logo: url("https://z-cdn-media.chatglm.cn/files/8ec1aee7-8829-4ced-bced-967afabfe871.png?auth_key=1885661775-07ae596fd00f48a6b3cbc7776eeed53e-0-4bba09ebd398730f5cb293106f527ccb");
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+      }
+      body {
+        font-family: var(--font-sans);
+        background: var(--cream);
+        color: var(--matcha-deep);
+        line-height: 1.7;
+        font-weight: 300;
+        overflow-x: hidden;
+        letter-spacing: 0.01em;
+        overscroll-behavior: none;
+      }
+      body.locked {
+        overflow: hidden;
+        height: 100vh;
+        touch-action: none;
+      }
+      body.drawer-open,
+      body.no-scroll {
+        overflow: hidden;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      button {
+        font-family: inherit;
+        cursor: pointer;
+        border: none;
+        background: none;
+      }
+      input,
+      textarea,
+      select {
+        font-family: inherit;
+        font-size: inherit;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      /* LOADING SCREEN */
+      #loader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background:
+          radial-gradient(
+            circle at 20% 30%,
+            rgba(232, 181, 162, 0.6) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(236, 230, 210, 0.6) 0%,
+            transparent 50%
+          ),
+          linear-gradient(135deg, #F5EBD8 0%, #F5EBD8 50%, #ECE6D2 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        transition:
+          opacity 0.6s ease,
+          visibility 0.6s ease;
+      }
+      #loader.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .loader-logo {
+        width: 100px;
+        height: auto;
+        opacity: 0;
+        filter: drop-shadow(0 4px 12px rgba(155, 73, 55, 0.18));
+        animation: loaderLogoIn 1.4s ease 0.15s forwards;
+      }
+      @keyframes loaderLogoIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px) scale(0.92);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .loader-progress {
+        font-family: var(--font-serif);
+        font-size: 2.2rem;
+        font-weight: 300;
+        letter-spacing: 0.15em;
+        color: var(--matcha-deep);
+        font-style: italic;
+      }
+      .loader-progress span {
+        font-weight: 500;
+        font-style: normal;
+        color: var(--strawberry-deep);
+      }
+      .loader-bar {
+        width: 180px;
+        height: 2px;
+        background: rgba(181, 154, 112, 0.15);
+        overflow: hidden;
+        border-radius: 2px;
+        position: relative;
+      }
+      .loader-bar-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(
+          90deg,
+          var(--strawberry),
+          var(--gold),
+          var(--matcha)
+        );
+        transition: width 0.15s linear;
+      }
+      .loader-text {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 0.9rem;
+        color: var(--matcha);
+        letter-spacing: 0.1em;
+        opacity: 0.7;
+      }
+
+      /* COVER */
+      #cover {
+        position: fixed;
+        inset: 0;
+        z-index: 9000;
+        background-image: var(--img-match-1);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        overflow: hidden;
+        touch-action: none;
+        transition:
+          opacity 0.9s ease,
+          transform 0.9s ease;
+      }
+      #cover.closing {
+        opacity: 0;
+        transform: scale(1.06);
+        pointer-events: none;
+      }
+      #cover::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(200, 117, 91, 0.12),
+          rgba(155, 73, 55, 0.12)
+        );
+      }
+      .cover-card {
+        position: relative;
+        background: rgba(255, 255, 255, 0.78);
+        backdrop-filter: blur(24px) saturate(140%);
+        -webkit-backdrop-filter: blur(24px) saturate(140%);
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        border-radius: 32px;
+        padding: 2.75rem 2rem;
+        max-width: 460px;
+        width: 100%;
+        text-align: center;
+        box-shadow:
+          0 30px 80px -25px rgba(155, 73, 55, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      }
+      .cover-ornament-top {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        color: var(--gold);
+        font-size: 0.75rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        font-family: var(--font-serif);
+      }
+      .cover-ornament-top::before,
+      .cover-ornament-top::after {
+        content: "";
+        width: 30px;
+        height: 1px;
+        background: var(--gold);
+      }
+      .cover-eyebrow {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 1rem;
+        color: var(--matcha);
+        margin-bottom: 0.5rem;
+      }
+      .cover-names {
+        font-family: var(--font-serif);
+        font-size: 2rem;
+        color: var(--matcha-deep);
+        line-height: 1.1;
+        margin: 0.5rem 0;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      .cover-names .amp {
+        font-family: var(--font-script);
+        color: var(--matcha-deep);
+        font-size: 2.2rem;
+        display: inline-block;
+        vertical-align: middle;
+        font-weight: 400;
+        line-height: 1;
+      }
+      .cover-divider {
+        width: 50px;
+        height: 1px;
+        background: var(--gold);
+        margin: 1.25rem auto;
+        position: relative;
+      }
+      .cover-divider::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 6px;
+        height: 6px;
+        background: var(--strawberry);
+        border-radius: 50%;
+      }
+      .cover-greeting {
+        font-family: var(--font-serif);
+        font-size: 1rem;
+        color: var(--matcha-deep);
+        margin-bottom: 0.25rem;
+        letter-spacing: 0.05em;
+      }
+      .cover-guest {
+        font-family: var(--font-script);
+        font-size: 2.3rem;
+        color: var(--strawberry-deep);
+        line-height: 1.2;
+        margin: 0.5rem 0 1rem;
+        text-shadow: 0 2px 8px rgba(155, 73, 55, 0.1);
+      }
+      .cover-note {
+        font-size: 0.78rem;
+        color: rgba(155, 73, 55, 0.75);
+        margin-bottom: 1.5rem;
+        font-style: italic;
+        line-height: 1.5;
+      }
+      .btn-open {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: linear-gradient(
+          135deg,
+          var(--strawberry),
+          var(--strawberry-deep)
+        );
+        color: white;
+        padding: 0.95rem 2.25rem;
+        border-radius: 100px;
+        font-size: 0.85rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        font-weight: 500;
+        box-shadow:
+          0 15px 35px -10px rgba(200, 117, 91, 0.55),
+          inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+        overflow: hidden;
+      }
+      .btn-open::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          var(--strawberry-deep),
+          var(--strawberry)
+        );
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .btn-open > * {
+        position: relative;
+        z-index: 1;
+      }
+      .btn-open:hover {
+        transform: translateY(-3px);
+        box-shadow:
+          0 20px 45px -10px rgba(200, 117, 91, 0.7),
+          inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      }
+      .btn-open:hover::before {
+        opacity: 1;
+      }
+
+      /* HERO */
+      #hero {
+        position: relative;
+        min-height: 100vh;
+        background-image: url("https://file.garden/alY9SkoxwgtjCGxf/Sani%20%26%20Warham/hero.PNG");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 2rem 1.5rem;
+        overflow: hidden;
+      }
+      #hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: transparent;
+      }
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 700px;
+      }
+      .hero-eyebrow {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 0.95rem;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.92);
+        margin-bottom: 0.75rem;
+        font-weight: 500;
+        text-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
+      }
+      .hero-name {
+        font-family: var(--font-serif);
+        font-size: clamp(2.5rem, 9vw, 5.5rem);
+        font-weight: 400;
+        color: var(--white);
+        line-height: 1;
+        letter-spacing: 0.01em;
+        text-shadow: 0 3px 18px rgba(0, 0, 0, 0.5);
+        font-style: italic;
+      }
+      .hero-amp {
+        font-family: var(--font-script);
+        color: var(--white);
+        font-size: clamp(2.5rem, 6vw, 3.5rem);
+        margin: 0.5rem 0;
+        display: block;
+        line-height: 0.8;
+        text-shadow: 0 3px 14px rgba(0, 0, 0, 0.45);
+      }
+      .hero-date {
+        font-family: var(--font-serif);
+        font-size: 1.05rem;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--white);
+        margin-top: 1.5rem;
+        font-weight: 500;
+        text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+      }
+      .scroll-indicator {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        color: var(--white);
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 0.8rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        z-index: 3;
+        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+      }
+      .scroll-indicator i {
+        animation: scrollBounce 2s ease-in-out infinite;
+      }
+      @keyframes scrollBounce {
+        0%,
+        100% {
+          transform: translateY(0);
+          opacity: 0.6;
+        }
+        50% {
+          transform: translateY(8px);
+          opacity: 1;
+        }
+      }
+
+      /* SECTIONS */
+      section {
+        position: relative;
+        padding: 5.5rem 1.5rem;
+        z-index: 2;
+      }
+      .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      .section-eyebrow {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 0.9rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--matcha);
+        margin-bottom: 0.5rem;
+      }
+      .section-heading {
+        font-family: var(--font-script);
+        font-size: clamp(2.5rem, 7vw, 4.2rem);
+        color: var(--strawberry-deep);
+        line-height: 1.1;
+        font-weight: 400;
+      }
+      .section-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        margin: 1.25rem auto 0;
+      }
+      .section-divider .line {
+        width: 40px;
+        height: 1px;
+        background: var(--gold);
+      }
+      .section-divider i {
+        color: var(--strawberry);
+        font-size: 0.85rem;
+      }
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      /* COUNTDOWN */
+      #countdown {
+        background: linear-gradient(
+          180deg,
+          var(--cream) 0%,
+          var(--blush-soft) 100%
+        );
+      }
+      .countdown-intro {
+        text-align: center;
+        max-width: 600px;
+        margin: 0 auto 2.5rem;
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 1.05rem;
+        color: var(--matcha-deep);
+        opacity: 0.85;
+      }
+      .countdown-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.75rem;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      .countdown-card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(200, 117, 91, 0.15);
+        border-radius: 22px;
+        padding: 1.5rem 0.5rem;
+        text-align: center;
+        box-shadow:
+          0 15px 40px -20px rgba(155, 73, 55, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        position: relative;
+        overflow: hidden;
+      }
+      .countdown-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 30px;
+        height: 2px;
+        background: var(--strawberry);
+        border-radius: 0 0 4px 4px;
+      }
+      .countdown-number {
+        font-family: var(--font-serif);
+        font-size: clamp(1.8rem, 6vw, 3rem);
+        font-weight: 500;
+        color: var(--strawberry-deep);
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
+      }
+      .countdown-label {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 0.75rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--matcha);
+        margin-top: 0.5rem;
+      }
+      #countdownDone {
+        text-align: center;
+        padding: 2rem;
+      }
+      #countdownDone .section-heading {
+        color: var(--strawberry-deep);
+      }
+
+      /* PROFILES */
+      #profiles {
+        background: var(--matcha-deep);
+      }
+      #profiles .section-title {
+        margin-bottom: 1.75rem;
+      }
+      #profiles .section-eyebrow {
+        color: rgba(255, 255, 255, 0.72);
+      }
+      #profiles .section-heading {
+        color: var(--blush);
+      }
+      #profiles .section-divider .line {
+        background: rgba(255, 255, 255, 0.45);
+      }
+      #profiles .section-divider i {
+        color: var(--gold-light);
+      }
+      .profile-quote {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: clamp(1rem, 2.6vw, 1.15rem);
+        line-height: 1.9;
+        color: rgba(255, 255, 255, 0.95);
+        max-width: 640px;
+        margin: 0 auto 3.25rem;
+        text-align: center;
+        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);
+        padding: 0 0.5rem;
+      }
+      .profile-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .profile-card {
+        text-align: center;
+        position: relative;
+      }
+      .profile-photo-wrap {
+        position: relative;
+        width: 220px;
+        height: 280px;
+        margin: 0 auto 1.5rem;
+      }
+      .profile-photo-wrap::before {
+        content: "";
+        position: absolute;
+        inset: -12px;
+        border: 1px solid var(--gold);
+        border-radius: 50% 50% 16px 16px;
+        opacity: 0.7;
+      }
+      .profile-photo {
+        width: 100%;
+        height: 100%;
+        border-radius: 50% 50% 16px 16px;
+        overflow: hidden;
+        border: 5px solid white;
+        box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.4);
+        position: relative;
+      }
+      .profile-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s ease;
+      }
+      .profile-card:hover .profile-photo img {
+        transform: scale(1.05);
+      }
+      .profile-role {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 0.85rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.72);
+        margin-bottom: 0.25rem;
+      }
+      .profile-name {
+        font-family: var(--font-serif);
+        font-size: 2.1rem;
+        color: var(--white);
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+      .profile-order {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 0.98rem;
+        color: rgba(255, 255, 255, 0.88);
+        margin: 0.15rem 0 0.1rem;
+      }
+      .profile-parents {
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.96);
+        margin-top: 0.5rem;
+        line-height: 1.7;
+      }
+      .profile-parents .label {
+        display: block;
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 0.78rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.62);
+        margin-bottom: 0.4rem;
+        opacity: 0.9;
+      }
+      .profile-ig {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin-top: 0.9rem;
+        font-size: 0.85rem;
+        color: var(--white);
+        font-family: var(--font-serif);
+        font-style: italic;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        padding: 0.3rem 0.85rem;
+        border-radius: 100px;
+        transition: all 0.3s;
+      }
+      .profile-ig:hover {
+        background: var(--strawberry);
+        color: white;
+        border-color: var(--strawberry);
+      }
+
+      /* EVENTS */
+      #events {
+        background: linear-gradient(
+          180deg,
+          var(--blush-soft) 0%,
+          var(--soft-green) 100%
+        );
+      }
+      #events .section-title {
+        margin-bottom: 1.75rem;
+      }
+      .events-intro {
+        max-width: 700px;
+        margin: 0 auto 3rem;
+        text-align: center;
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 1.05rem;
+        line-height: 1.8;
+        color: var(--matcha-deep);
+        opacity: 0.9;
+      }
+      .event-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .event-card {
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(18px);
+        border-radius: 28px;
+        padding: 2.5rem 2rem;
+        text-align: center;
+        box-shadow:
+          0 25px 60px -25px rgba(155, 73, 55, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.4s ease;
+      }
+      .event-card:hover {
+        transform: translateY(-4px);
+      }
+      .event-card::before {
+        content: "";
+        position: absolute;
+        top: -30px;
+        right: -30px;
+        width: 100px;
+        height: 100px;
+        background: radial-gradient(
+          circle,
+          rgba(200, 117, 91, 0.08),
+          transparent 70%
+        );
+        border-radius: 50%;
+      }
+      .event-icon {
+        width: 64px;
+        height: 64px;
+        margin: 0 auto 1.25rem;
+        background: linear-gradient(135deg, var(--blush), var(--soft-green));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--strawberry-deep);
+        font-size: 1.5rem;
+        box-shadow: 0 12px 25px -10px rgba(200, 117, 91, 0.4);
+        position: relative;
+        z-index: 1;
+      }
+      .event-title {
+        font-family: var(--font-serif);
+        font-size: 1.9rem;
+        color: var(--matcha-deep);
+        margin-bottom: 1rem;
+        font-weight: 500;
+        position: relative;
+        z-index: 1;
+      }
+      .event-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        margin: 0.4rem 0;
+        font-size: 0.95rem;
+        color: var(--matcha-deep);
+      }
+      .event-row i {
+        color: var(--strawberry);
+        width: 18px;
+        font-size: 0.9rem;
+      }
+      .event-address {
+        font-size: 0.82rem;
+        opacity: 0.7;
+        margin: 0.5rem 0 0;
+        max-width: 280px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.5;
+      }
+      .btn-location {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: linear-gradient(135deg, var(--matcha), var(--matcha-deep));
+        color: white;
+        padding: 0.75rem 1.75rem;
+        border-radius: 100px;
+        font-size: 0.82rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-top: 1.5rem;
+        transition: all 0.3s;
+        box-shadow: 0 12px 25px -10px rgba(155, 73, 55, 0.5);
+        position: relative;
+        z-index: 1;
+      }
+      .btn-location:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 35px -10px rgba(155, 73, 55, 0.65);
+      }
+
+      /* DRESS CODE CARD */
+      .dress-code-text {
+        font-size: 0.92rem;
+        color: var(--matcha-deep);
+        opacity: 0.85;
+        line-height: 1.7;
+        max-width: 340px;
+        margin: 0 auto 0.25rem;
+        position: relative;
+        z-index: 1;
+      }
+      .dress-colors {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1.5rem;
+        position: relative;
+        z-index: 1;
+      }
+      .dress-swatch {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        border: 3px solid #ffffff;
+        box-shadow:
+          0 6px 16px -6px rgba(0, 0, 0, 0.35),
+          inset 0 1px 2px rgba(255, 255, 255, 0.45);
+        transition: transform 0.3s ease;
+      }
+      .dress-swatch:hover {
+        transform: scale(1.12);
+      }
+
+      /* LOVE STORY */
+      #love-story {
+        background: var(--cream);
+      }
+      .timeline {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 1rem 0;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 2px;
+        background: linear-gradient(
+          180deg,
+          transparent,
+          var(--gold) 10%,
+          var(--gold) 90%,
+          transparent
+        );
+        transform: translateX(-50%);
+      }
+      .timeline-item {
+        position: relative;
+        width: 50%;
+        padding: 1rem 2.5rem;
+        margin-bottom: 1rem;
+      }
+      .timeline-item:nth-child(odd) {
+        left: 0;
+      }
+      .timeline-item:nth-child(odd) .timeline-content {
+        text-align: right;
+      }
+      .timeline-item:nth-child(even) {
+        left: 50%;
+      }
+      .timeline-dot {
+        position: absolute;
+        top: 1.75rem;
+        width: 18px;
+        height: 18px;
+        background: white;
+        border: 3px solid var(--strawberry);
+        border-radius: 50%;
+        z-index: 2;
+        box-shadow: 0 0 0 5px rgba(200, 117, 91, 0.12);
+      }
+      .timeline-item:nth-child(odd) .timeline-dot {
+        right: -9px;
+      }
+      .timeline-item:nth-child(even) .timeline-dot {
+        left: -9px;
+      }
+      .timeline-content {
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        border-radius: 22px;
+        padding: 1.5rem 1.5rem;
+        box-shadow: 0 18px 45px -22px rgba(155, 73, 55, 0.3);
+        transition: transform 0.3s ease;
+      }
+      .timeline-content:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 22px 50px -22px rgba(155, 73, 55, 0.4);
+      }
+      .timeline-year {
+        font-family: var(--font-script);
+        font-size: 2.3rem;
+        color: var(--strawberry);
+        line-height: 1;
+      }
+      .timeline-title {
+        font-family: var(--font-serif);
+        font-size: 1.3rem;
+        color: var(--matcha-deep);
+        margin: 0.25rem 0 0.5rem;
+        font-weight: 500;
+      }
+      .timeline-desc {
+        font-size: 0.9rem;
+        color: rgba(155, 73, 55, 0.9);
+        line-height: 1.6;
+      }
+
+      /* GALLERY */
+      #gallery {
+        background: linear-gradient(
+          180deg,
+          var(--cream) 0%,
+          var(--soft-green) 100%
+        );
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .gallery-item {
+        aspect-ratio: 3/5;
+        border-radius: 18px;
+        overflow: hidden;
+        cursor: pointer;
+        position: relative;
+        box-shadow: 0 15px 35px -15px rgba(155, 73, 55, 0.35);
+        background: var(--soft-pink);
+      }
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .gallery-item::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          transparent 50%,
+          rgba(107, 51, 37, 0.45) 100%
+        );
+        opacity: 0;
+        transition: opacity 0.4s;
+      }
+      .gallery-item:hover::after {
+        opacity: 1;
+      }
+      .gallery-item:hover img {
+        transform: scale(1.1);
+      }
+      .gallery-item .zoom-icon {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        width: 36px;
+        height: 36px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--strawberry-deep);
+        font-size: 0.85rem;
+        opacity: 0;
+        transform: scale(0.8);
+        transition: all 0.4s;
+        z-index: 2;
+      }
+      .gallery-item:hover .zoom-icon {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      /* DOA UNTUK PENGANTIN */
+      #doa-pengantin {
+        background: linear-gradient(
+          180deg,
+          var(--soft-green) 0%,
+          var(--cream) 100%
+        );
+      }
+      .doa-arabic {
+        font-family: "Amiri", "Scheherazade New", "Traditional Arabic", serif;
+        direction: rtl;
+        font-size: clamp(1.5rem, 4.6vw, 2.25rem);
+        line-height: 2.15;
+        color: var(--matcha-deep);
+        text-align: center;
+        max-width: 760px;
+        margin: 0 auto 1.4rem;
+        overflow-wrap: break-word;
+      }
+      .doa-translate {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 1.05rem;
+        color: rgba(58, 58, 58, 0.82);
+        line-height: 1.8;
+        text-align: center;
+        max-width: 560px;
+        margin: 0 auto;
+      }
+
+      /* RSVP */
+      #rsvp {
+        background: var(--cream);
+      }
+      .rsvp-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .rsvp-form {
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(18px);
+        border: 1px solid rgba(200, 117, 91, 0.15);
+        border-radius: 28px;
+        padding: 2.5rem 2rem;
+        box-shadow: 0 25px 60px -25px rgba(155, 73, 55, 0.3);
+      }
+      .form-group {
+        margin-bottom: 1.25rem;
+      }
+      .form-label {
+        display: block;
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 0.85rem;
+        letter-spacing: 0.1em;
+        color: var(--matcha);
+        margin-bottom: 0.5rem;
+      }
+      .form-input,
+      .form-select,
+      .form-textarea {
+        width: 100%;
+        padding: 0.9rem 1.1rem;
+        border: 1px solid rgba(181, 154, 112, 0.25);
+        border-radius: 14px;
+        background: white;
+        font-size: 0.95rem;
+        color: var(--matcha-deep);
+        transition: all 0.3s;
+        font-family: var(--font-sans);
+      }
+      .form-input:focus,
+      .form-select:focus,
+      .form-textarea:focus {
+        outline: none;
+        border-color: var(--strawberry);
+        box-shadow: 0 0 0 4px rgba(200, 117, 91, 0.12);
+      }
+      .form-textarea {
+        min-height: 110px;
+        resize: vertical;
+      }
+      .form-select {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%237C8C5C' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        padding-right: 2.5rem;
+      }
+      .form-error {
+        color: var(--strawberry-deep);
+        font-size: 0.78rem;
+        margin-top: 0.35rem;
+        font-style: italic;
+        display: none;
+      }
+      .form-error.show {
+        display: block;
+      }
+      .btn-submit {
+        width: 100%;
+        background: linear-gradient(
+          135deg,
+          var(--strawberry),
+          var(--strawberry-deep)
+        );
+        color: white;
+        padding: 1rem;
+        border-radius: 100px;
+        font-size: 0.85rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-top: 0.5rem;
+        box-shadow: 0 15px 35px -10px rgba(200, 117, 91, 0.55);
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+      }
+      .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 45px -10px rgba(200, 117, 91, 0.7);
+      }
+      .btn-submit:disabled {
+        opacity: 0.7;
+        cursor: wait;
+      }
+      .wishes-panel {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(181, 154, 112, 0.15);
+        border-radius: 28px;
+        padding: 2rem 1.5rem;
+        box-shadow: 0 15px 40px -20px rgba(155, 73, 55, 0.25);
+      }
+      .wishes-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.25rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(181, 154, 112, 0.15);
+      }
+      .wishes-title {
+        font-family: var(--font-serif);
+        font-size: 1.3rem;
+        color: var(--matcha-deep);
+        font-weight: 500;
+      }
+      .wishes-count {
+        font-size: 0.8rem;
+        color: var(--strawberry-deep);
+        background: var(--blush-soft);
+        padding: 0.3rem 0.85rem;
+        border-radius: 100px;
+        font-family: var(--font-serif);
+        font-style: italic;
+        white-space: nowrap;
+      }
+      .wishes-list {
+        max-height: 480px;
+        overflow-y: auto;
+        padding-right: 0.5rem;
+      }
+      .wishes-list::-webkit-scrollbar {
+        width: 4px;
+      }
+      .wishes-list::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .wishes-list::-webkit-scrollbar-thumb {
+        background: var(--sage);
+        border-radius: 4px;
+      }
+      .wishes-empty {
+        text-align: center;
+        font-style: italic;
+        color: var(--matcha);
+        padding: 2.5rem 1rem;
+        font-size: 0.9rem;
+        line-height: 1.8;
+      }
+      .wish-item {
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid rgba(181, 154, 112, 0.12);
+        border-radius: 18px;
+        padding: 1rem 1.25rem;
+        margin-bottom: 0.75rem;
+        animation: wishIn 0.5s ease;
+      }
+      @keyframes wishIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .wish-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.4rem;
+        gap: 0.5rem;
+      }
+      .wish-name {
+        font-family: var(--font-serif);
+        font-size: 1.1rem;
+        color: var(--strawberry-deep);
+        font-weight: 500;
+      }
+      .wish-attendance {
+        font-size: 0.68rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 0.2rem 0.65rem;
+        border-radius: 100px;
+        font-weight: 500;
+        flex-shrink: 0;
+      }
+      .wish-attendance.hadir {
+        background: var(--soft-green);
+        color: var(--matcha-deep);
+      }
+      .wish-attendance.tidak {
+        background: var(--blush);
+        color: var(--strawberry-deep);
+      }
+      .wish-attendance.ragu {
+        background: var(--cream-deep);
+        color: var(--gold);
+      }
+      .wish-message {
+        font-size: 0.9rem;
+        color: var(--matcha-deep);
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+      }
+
+      /* GIFT */
+      #gift {
+        background: linear-gradient(
+          180deg,
+          var(--soft-green) 0%,
+          var(--blush-soft) 100%
+        );
+      }
+      .gift-card {
+        max-width: 600px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(18px);
+        border-radius: 32px;
+        padding: 3rem 2rem;
+        text-align: center;
+        box-shadow: 0 25px 60px -25px rgba(155, 73, 55, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        position: relative;
+        overflow: hidden;
+      }
+      .gift-card::before {
+        content: "";
+        position: absolute;
+        top: -50px;
+        left: -50px;
+        width: 150px;
+        height: 150px;
+        background: radial-gradient(
+          circle,
+          rgba(200, 117, 91, 0.1),
+          transparent 70%
+        );
+        border-radius: 50%;
+      }
+      .gift-card::after {
+        content: "";
+        position: absolute;
+        bottom: -50px;
+        right: -50px;
+        width: 150px;
+        height: 150px;
+        background: radial-gradient(
+          circle,
+          rgba(181, 154, 112, 0.1),
+          transparent 70%
+        );
+        border-radius: 50%;
+      }
+      .gift-icon {
+        width: 76px;
+        height: 76px;
+        margin: 0 auto 1.5rem;
+        background: linear-gradient(
+          135deg,
+          var(--strawberry),
+          var(--strawberry-deep)
+        );
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.6rem;
+        box-shadow: 0 18px 35px -12px rgba(200, 117, 91, 0.55);
+        position: relative;
+        z-index: 1;
+      }
+      .gift-text {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 1.1rem;
+        color: var(--matcha-deep);
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+        position: relative;
+        z-index: 1;
+      }
+      .btn-gift {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: linear-gradient(135deg, var(--matcha), var(--matcha-deep));
+        color: white;
+        padding: 0.95rem 2.25rem;
+        border-radius: 100px;
+        font-size: 0.85rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        font-weight: 500;
+        box-shadow: 0 15px 35px -10px rgba(155, 73, 55, 0.55);
+        transition: all 0.3s;
+        position: relative;
+        z-index: 1;
+      }
+      .btn-gift:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 45px -10px rgba(155, 73, 55, 0.7);
+      }
+
+      /* THANK YOU SECTION */
+      #closing {
+        background: linear-gradient(
+          180deg,
+          var(--blush-soft) 0%,
+          var(--blush) 100%
+        );
+      }
+      .closing-quote {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: clamp(1.05rem, 2.8vw, 1.3rem);
+        line-height: 1.95;
+        color: var(--matcha-deep);
+        text-align: center;
+        max-width: 680px;
+        margin: 0 auto 1.15rem;
+      }
+      .closing-surah {
+        text-align: center;
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 0.85rem;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: var(--matcha-deep);
+        opacity: 0.8;
+        margin-bottom: 2.5rem;
+      }
+      .closing-divider {
+        width: 50px;
+        height: 1px;
+        background: var(--gold);
+        margin: 0 auto 2.5rem;
+        position: relative;
+      }
+      .closing-divider::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 6px;
+        height: 6px;
+        background: var(--strawberry);
+        border-radius: 50%;
+      }
+      .closing-note {
+        text-align: center;
+        font-family: var(--font-serif);
+        font-size: clamp(1rem, 2.5vw, 1.15rem);
+        line-height: 1.9;
+        color: var(--matcha-deep);
+        max-width: 640px;
+        margin: 0 auto 2.75rem;
+      }
+      .closing-eyebrow {
+        text-align: center;
+        font-family: var(--font-sans);
+        font-size: 0.78rem;
+        font-weight: 500;
+        letter-spacing: 0.38em;
+        text-transform: uppercase;
+        color: var(--matcha-deep);
+        opacity: 0.85;
+        margin-bottom: 1rem;
+      }
+      .closing-names {
+        text-align: center;
+        font-family: var(--font-script);
+        font-size: clamp(3.4rem, 12vw, 6.5rem);
+        color: var(--strawberry-deep);
+        line-height: 1.1;
+        text-shadow: 0 2px 14px rgba(155, 73, 55, 0.12);
+      }
+
+      /* FOOTER */
+      .site-footer {
+        position: relative;
+        z-index: 2;
+        background: var(--matcha-deep);
+        text-align: center;
+        padding: 3.5rem 1.5rem 2.25rem;
+      }
+      .footer-brand {
+        margin-bottom: 1.9rem;
+      }
+      .footer-brand-link {
+        display: block;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .footer-brand-link:focus-visible {
+        outline: 1px dashed rgba(245, 235, 216, 0.5);
+        outline-offset: 8px;
+      }
+      .footer-brand-logo {
+        width: 108px;
+        height: auto;
+        margin: 0 auto;
+        display: block;
+        filter: invert(1);
+        mix-blend-mode: screen;
+        transition: transform 0.3s ease;
+      }
+      .footer-brand-link:hover .footer-brand-logo {
+        transform: scale(1.04);
+      }
+      .footer-brand-text {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.15rem;
+      }
+      .footer-brand-made {
+        font-size: 0.72rem;
+        letter-spacing: 0.22em;
+        color: rgba(245, 235, 216, 0.6);
+      }
+      .footer-brand-nurra {
+        font-family: var(--font-script);
+        font-size: 2.1rem;
+        color: var(--cream);
+        line-height: 1;
+      }
+      .footer-thanks {
+        font-family: var(--font-script);
+        font-size: clamp(2.7rem, 8vw, 4rem);
+        color: var(--blush);
+        line-height: 1.15;
+        margin-bottom: 0.75rem;
+      }
+      .footer-names {
+        font-family: var(--font-serif);
+        font-size: clamp(1.45rem, 4.5vw, 2rem);
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        color: var(--cream);
+        margin-bottom: 1rem;
+      }
+      .footer-date {
+        font-family: var(--font-sans);
+        font-size: 0.78rem;
+        letter-spacing: 0.45em;
+        text-transform: uppercase;
+        color: rgba(245, 235, 216, 0.72);
+      }
+      .footer-divider {
+        width: 50px;
+        height: 1px;
+        background: rgba(245, 235, 216, 0.3);
+        margin: 2rem auto 1.15rem;
+      }
+      .footer-credit {
+        font-family: var(--font-sans);
+        font-size: 0.62rem;
+        letter-spacing: 0.34em;
+        text-transform: uppercase;
+        color: rgba(245, 235, 216, 0.55);
+      }
+      .footer-credit a {
+        color: rgba(245, 235, 216, 0.55);
+        transition: color 0.3s;
+      }
+      .footer-credit a:hover {
+        color: var(--blush);
+      }
+
+      /* MODAL */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 8000;
+        background: rgba(107, 51, 37, 0.55);
+        backdrop-filter: blur(8px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+      }
+      .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .modal {
+        background: white;
+        border-radius: 32px;
+        max-width: 480px;
+        width: 100%;
+        padding: 2.5rem 2rem;
+        position: relative;
+        box-shadow: 0 40px 100px -25px rgba(0, 0, 0, 0.4);
+        max-height: 90vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        transform: scale(0.92) translateY(20px);
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .modal-overlay.active .modal {
+        transform: scale(1) translateY(0);
+      }
+      .modal::-webkit-scrollbar {
+        width: 4px;
+      }
+      .modal::-webkit-scrollbar-thumb {
+        background: var(--sage);
+        border-radius: 4px;
+      }
+      .modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: var(--blush-soft);
+        color: var(--strawberry-deep);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+        z-index: 2;
+      }
+      .modal-close:hover {
+        transform: rotate(90deg);
+        background: var(--strawberry);
+        color: white;
+      }
+      .modal-title {
+        font-family: var(--font-script);
+        font-size: 2.3rem;
+        color: var(--strawberry-deep);
+        text-align: center;
+        margin-bottom: 0.25rem;
+      }
+      .modal-subtitle {
+        text-align: center;
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 0.85rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--matcha);
+        margin-bottom: 1.75rem;
+      }
+      .modal-section-label {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 0.85rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--matcha);
+        margin: 1.5rem 0 0.75rem;
+        text-align: center;
+        position: relative;
+      }
+      .modal-section-label::before,
+      .modal-section-label::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 30px;
+        height: 1px;
+        background: var(--gold);
+      }
+      .modal-section-label::before {
+        left: 50%;
+        transform: translateX(-90px);
+      }
+      .modal-section-label::after {
+        right: 50%;
+        transform: translateX(90px);
+      }
+      .bank-card {
+        background: linear-gradient(
+          135deg,
+          var(--blush-soft),
+          var(--soft-green)
+        );
+        border-radius: 20px;
+        padding: 1.5rem 1.25rem;
+        margin-bottom: 0.85rem;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        position: relative;
+        overflow: hidden;
+      }
+      .bank-card::before {
+        content: "";
+        position: absolute;
+        top: -20px;
+        right: -20px;
+        width: 80px;
+        height: 80px;
+        background: radial-gradient(
+          circle,
+          rgba(200, 117, 91, 0.1),
+          transparent 70%
+        );
+        border-radius: 50%;
+      }
+      .bank-name {
+        font-family: var(--font-serif);
+        font-size: 1rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--matcha-deep);
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+      .bank-number {
+        font-size: 1.4rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        color: var(--strawberry-deep);
+        margin: 0.5rem 0;
+        font-family: var(--font-serif);
+        overflow-wrap: anywhere;
+      }
+      .bank-holder {
+        font-size: 0.85rem;
+        color: var(--matcha-deep);
+        margin-bottom: 1rem;
+        font-style: italic;
+        font-family: var(--font-serif);
+      }
+      .btn-copy {
+        background: var(--matcha-deep);
+        color: white;
+        padding: 0.55rem 1.4rem;
+        border-radius: 100px;
+        font-size: 0.75rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        transition: all 0.3s;
+        font-weight: 500;
+      }
+      .btn-copy:hover {
+        background: var(--strawberry);
+        transform: translateY(-1px);
+      }
+      .address-card {
+        background: var(--cream);
+        border-radius: 20px;
+        padding: 1.5rem 1.25rem;
+        text-align: center;
+        border: 1px solid rgba(181, 154, 112, 0.15);
+      }
+      .address-recipient {
+        font-family: var(--font-serif);
+        font-size: 1.15rem;
+        color: var(--matcha-deep);
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+      .address-text {
+        font-size: 0.88rem;
+        color: var(--matcha-deep);
+        margin-bottom: 1rem;
+        line-height: 1.6;
+        opacity: 0.85;
+        overflow-wrap: anywhere;
+      }
+
+      /* HAMBURGER & DRAWER */
+      .hamburger-btn {
+        position: fixed;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        z-index: 7500;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          var(--strawberry),
+          var(--strawberry-deep)
+        );
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        box-shadow: 0 12px 30px -8px rgba(200, 117, 91, 0.6);
+        cursor: pointer;
+        transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        opacity: 0;
+        visibility: hidden;
+        transform: scale(0.6) translateY(20px);
+      }
+      .hamburger-btn.visible {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1) translateY(0);
+      }
+      .hamburger-btn:hover {
+        transform: scale(1.08) translateY(0);
+      }
+      .hamburger-btn.visible:hover {
+        transform: scale(1.08) translateY(0);
+      }
+      .hamburger-btn span.bar {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: white;
+        border-radius: 2px;
+        transition: all 0.35s ease;
+      }
+      .hamburger-btn.active span.bar:nth-child(2) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .hamburger-btn.active span.bar:nth-child(3) {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+      .hamburger-btn.active span.bar:nth-child(4) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+      .hamburger-btn .music-indicator {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #4caf50;
+        border: 2px solid white;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .hamburger-btn.music-on .music-indicator {
+        opacity: 1;
+        animation: musicIndicatorPulse 1.5s ease-in-out infinite;
+      }
+      @keyframes musicIndicatorPulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.4);
+        }
+      }
+      .drawer-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 7400;
+        background: rgba(107, 51, 37, 0.35);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s ease;
+      }
+      .drawer-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .bottom-drawer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 7501;
+        background: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(24px) saturate(140%);
+        -webkit-backdrop-filter: blur(24px) saturate(140%);
+        border-radius: 32px 32px 0 0;
+        padding: 0.75rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom));
+        box-shadow: 0 -20px 60px -20px rgba(155, 73, 55, 0.35);
+        transform: translateY(110%);
+        transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        border-top: 1px solid rgba(200, 117, 91, 0.12);
+        max-height: 80vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .bottom-drawer.active {
+        transform: translateY(0);
+      }
+      .drawer-handle {
+        width: 40px;
+        height: 4px;
+        background: var(--sage);
+        border-radius: 4px;
+        margin: 0 auto 1rem;
+        opacity: 0.4;
+      }
+      .drawer-label {
+        text-align: center;
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 0.75rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--matcha);
+        margin-bottom: 1.25rem;
+        opacity: 0.7;
+      }
+      .drawer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+        gap: 0.85rem;
+        padding: 0.25rem 0 1rem;
+      }
+      .drawer-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 1rem 0.5rem;
+        min-height: 100px;
+        border-radius: 20px;
+        color: var(--matcha-deep);
+        font-size: 0.7rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        background: rgba(181, 154, 112, 0.06);
+        cursor: pointer;
+        text-align: center;
+        border: 1px solid transparent;
+      }
+      .drawer-nav-item .icon-wrap {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: rgba(200, 117, 91, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--strawberry-deep);
+        transition: all 0.3s;
+        margin-bottom: 0.25rem;
+      }
+      .drawer-nav-item i {
+        font-size: 1.25rem;
+      }
+      .drawer-nav-item:hover {
+        background: #fff;
+        border-color: rgba(200, 117, 91, 0.12);
+        box-shadow: 0 8px 20px -8px rgba(155, 73, 55, 0.15);
+        transform: translateY(-2px);
+      }
+      .drawer-nav-item:hover .icon-wrap {
+        background: var(--strawberry);
+        color: #fff;
+        transform: scale(1.05);
+      }
+      .drawer-nav-item.active {
+        background: linear-gradient(
+          135deg,
+          var(--blush-soft),
+          var(--soft-green)
+        );
+        border-color: rgba(200, 117, 91, 0.15);
+        box-shadow: 0 8px 20px -8px rgba(200, 117, 91, 0.2);
+      }
+      .drawer-nav-item.active .icon-wrap {
+        background: linear-gradient(
+          135deg,
+          var(--strawberry),
+          var(--strawberry-deep)
+        );
+        color: #fff;
+        box-shadow: 0 4px 12px -4px rgba(200, 117, 91, 0.4);
+      }
+      .drawer-music-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 1rem 0.5rem;
+        min-height: 100px;
+        border-radius: 20px;
+        background: linear-gradient(135deg, var(--matcha), var(--matcha-deep));
+        color: white;
+        font-size: 0.7rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-weight: 500;
+        position: relative;
+        box-shadow: 0 8px 20px -8px rgba(155, 73, 55, 0.4);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: 1px solid transparent;
+      }
+      .drawer-music-btn .icon-wrap {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        transition: all 0.3s;
+        margin-bottom: 0.25rem;
+        position: relative;
+      }
+      .drawer-music-btn i {
+        font-size: 1.25rem;
+      }
+      .drawer-music-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px -8px rgba(155, 73, 55, 0.55);
+      }
+      .drawer-music-btn.playing {
+        animation: musicPulse 2s ease-in-out infinite;
+      }
+      @keyframes musicPulse {
+        0%,
+        100% {
+          box-shadow:
+            0 8px 20px -8px rgba(155, 73, 55, 0.4),
+            0 0 0 0 rgba(155, 73, 55, 0.5);
+        }
+        50% {
+          box-shadow:
+            0 8px 20px -8px rgba(155, 73, 55, 0.4),
+            0 0 0 12px rgba(155, 73, 55, 0);
+        }
+      }
+      .drawer-music-btn .disc {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 1px dashed rgba(255, 255, 255, 0.5);
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .drawer-music-btn.playing .disc {
+        opacity: 1;
+        animation: spin 4s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: translate(-50%, -50%) rotate(360deg);
+        }
+      }
+
+      /* TOAST */
+      .toast {
+        position: fixed;
+        bottom: 6rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        background: var(--matcha-deep);
+        color: white;
+        padding: 0.85rem 1.75rem;
+        border-radius: 100px;
+        font-size: 0.85rem;
+        z-index: 8500;
+        opacity: 0;
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        pointer-events: none;
+        max-width: calc(100vw - 3rem);
+        text-align: center;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+      .toast i {
+        color: var(--blush);
+      }
+
+      /* LIGHTBOX */
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 8500;
+        background: rgba(20, 20, 20, 0.96);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+        padding: 1rem;
+      }
+      .lightbox.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .lightbox-img {
+        max-width: 90vw;
+        max-height: 82vh;
+        border-radius: 16px;
+        box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.5);
+        transform: scale(0.92);
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .lightbox.active .lightbox-img {
+        transform: scale(1);
+      }
+      .lightbox-btn {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.12);
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        transition: all 0.3s;
+        backdrop-filter: blur(8px);
+      }
+      .lightbox-btn:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+      .lightbox-close {
+        top: 1.5rem;
+        right: 1.5rem;
+      }
+      .lightbox-prev {
+        left: 1.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .lightbox-next {
+        right: 1.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .lightbox-counter {
+        position: absolute;
+        bottom: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 0.9rem;
+        letter-spacing: 0.2em;
+        opacity: 0.7;
+      }
+
+      /* PETALS */
+      .petals-container {
+        position: fixed;
+        inset: 0;
+        z-index: 5000;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .petal {
+        position: absolute;
+        top: 0;
+        border-radius: 100% 0 100% 0;
+        opacity: 0;
+        will-change: transform, opacity;
+      }
+      .petal-pink {
+        background: linear-gradient(135deg, var(--blush), var(--strawberry));
+      }
+      .petal-sage {
+        background: linear-gradient(135deg, var(--soft-green), var(--sage));
+      }
+
+      /* RESPONSIVE */
+      @media (min-width: 900px) {
+        section {
+          padding: 6.5rem 2rem;
+        }
+        .event-grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.25rem;
+          max-width: 1020px;
+        }
+        .event-card {
+          padding: 2.5rem 1.5rem;
+        }
+        .dress-swatch {
+          width: 40px;
+          height: 40px;
+        }
+        .gallery-grid {
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1rem;
+        }
+        .rsvp-grid {
+          grid-template-columns: 1.05fr 0.95fr;
+          gap: 2.5rem;
+          align-items: start;
+        }
+      }
+
+      @media (max-width: 640px) {
+        section {
+          padding: 4.5rem 1.25rem;
+        }
+        .cover-card {
+          padding: 2.25rem 1.5rem;
+        }
+        .cover-names {
+          font-size: 1.7rem;
+        }
+        .cover-names .amp {
+          font-size: 1.9rem;
+        }
+        .cover-guest {
+          font-size: 2rem;
+        }
+        .countdown-card {
+          padding: 1.25rem 0.4rem;
+          border-radius: 18px;
+        }
+        .countdown-number {
+          font-size: 1.7rem;
+        }
+        .profile-photo-wrap {
+          width: 190px;
+          height: 240px;
+        }
+        .profile-name {
+          font-size: 1.85rem;
+        }
+        .profile-parents {
+          font-size: 0.9rem;
+        }
+        .dress-swatch {
+          width: 44px;
+          height: 44px;
+        }
+        .doa-arabic {
+          line-height: 2.3;
+        }
+        .modal {
+          padding: 2.25rem 1.35rem;
+        }
+        .modal-section-label::before {
+          left: 0;
+          transform: none;
+        }
+        .modal-section-label::after {
+          right: 0;
+          transform: none;
+        }
+        .rsvp-form {
+          padding: 2rem 1.35rem;
+        }
+        .wishes-list {
+          max-height: 380px;
+        }
+        .lightbox-btn {
+          width: 42px;
+          height: 42px;
+        }
+        .lightbox-prev {
+          left: 0.75rem;
+        }
+        .lightbox-next {
+          right: 0.75rem;
+        }
+        .timeline::before {
+          left: 9px;
+          transform: none;
+        }
+        .timeline-item {
+          width: 100%;
+          padding: 0 0 0 2.4rem;
+        }
+        .timeline-item:nth-child(odd),
+        .timeline-item:nth-child(even) {
+          left: 0;
+        }
+        .timeline-item:nth-child(odd) .timeline-content {
+          text-align: left;
+        }
+        .timeline-item:nth-child(odd) .timeline-dot,
+        .timeline-item:nth-child(even) .timeline-dot {
+          left: 1px;
+          right: auto;
+        }
+        .gift-card {
+          padding: 2.5rem 1.5rem;
+        }
+        .closing-quote {
+          line-height: 1.85;
+        }
+        .site-footer {
+          padding: 2.9rem 1.25rem 1.9rem;
+        }
+        .footer-brand-logo {
+          width: 88px;
+        }
+        .footer-brand-text .footer-brand-nurra {
+          font-size: 1.8rem;
+        }
+      }
+
+      @media (max-width: 380px) {
+        .profile-photo-wrap {
+          width: 170px;
+          height: 215px;
+        }
+        .dress-swatch {
+          width: 40px;
+          height: 40px;
+        }
+        .cover-guest {
+          font-size: 1.75rem;
+        }
+        .hero-eyebrow {
+          letter-spacing: 0.22em;
+        }
+        .closing-surah {
+          letter-spacing: 0.15em;
+        }
+        .closing-eyebrow {
+          letter-spacing: 0.26em;
+        }
+        .footer-date {
+          letter-spacing: 0.32em;
+        }
+        .footer-credit {
+          letter-spacing: 0.24em;
+          font-size: 0.58rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="locked">
+    <!-- LOADING SCREEN -->
+    <div id="loader">
+      <img
+        class="loader-logo"
+        alt="Logo"
+        src="https://z-cdn-media.chatglm.cn/files/8ec1aee7-8829-4ced-bced-967afabfe871.png?auth_key=1885661775-07ae596fd00f48a6b3cbc7776eeed53e-0-4bba09ebd398730f5cb293106f527ccb"
+        onerror="this.style.display = 'none'" />
+      <div class="loader-progress"><span id="loaderPercent">0</span>%</div>
+      <div class="loader-bar">
+        <div class="loader-bar-fill" id="loaderBar"></div>
+      </div>
+      <div class="loader-text">Menyiapkan undangan...</div>
+    </div>
+
+    <!-- COVER -->
+    <section id="cover">
+      <div class="cover-card">
+        <div class="cover-ornament-top">The Wedding Of</div>
+        <div class="cover-eyebrow">We Are Getting Married</div>
+        <div class="cover-names">
+          <span id="coverGroom">Groom</span>
+          <span class="amp">&amp;</span>
+          <span id="coverBride">Bride</span>
+        </div>
+        <div class="cover-divider"></div>
+        <div class="cover-greeting">Kepada Yth. Bapak/Ibu/Saudara/i</div>
+        <div class="cover-guest" id="coverGuest">Tamu Undangan</div>
+        <div class="cover-note">
+          Mohon maaf apabila terdapat kesalahan penulisan nama &amp; gelar
+        </div>
+        <button class="btn-open" id="btnOpen">
+          <i class="fa-solid fa-envelope-open"></i><span>Buka Undangan</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-content">
+        <div class="hero-eyebrow">The Wedding Of</div>
+        <h1 class="hero-name" id="heroGroom">Groom</h1>
+        <div class="hero-amp">&amp;</div>
+        <h1 class="hero-name" id="heroBride">Bride</h1>
+        <div class="hero-date" id="heroDate"></div>
+      </div>
+      <div class="scroll-indicator">
+        <span>Scroll</span><i class="fa-solid fa-chevron-down"></i>
+      </div>
+    </section>
+
+    <!-- COUNTDOWN -->
+    <section id="countdown">
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <div class="section-eyebrow">Counting The Days</div>
+          <h2 class="section-heading">Counting Down to<br />Our Special Day</h2>
+          <div class="section-divider">
+            <span class="line"></span><i class="fa-solid fa-heart"></i
+            ><span class="line"></span>
+          </div>
+        </div>
+        <p class="countdown-intro" id="countdownIntro" data-aos="fade-up">
+          Setiap detik membawa kita lebih dekat pada hari di mana dua hati akan
+          menyatu dalam ikatan suci.
+        </p>
+        <div class="countdown-grid" id="countdownGrid" data-aos="fade-up">
+          <div class="countdown-card">
+            <div class="countdown-number" id="cdDays">00</div>
+            <div class="countdown-label">Hari</div>
+          </div>
+          <div class="countdown-card">
+            <div class="countdown-number" id="cdHours">00</div>
+            <div class="countdown-label">Jam</div>
+          </div>
+          <div class="countdown-card">
+            <div class="countdown-number" id="cdMinutes">00</div>
+            <div class="countdown-label">Menit</div>
+          </div>
+          <div class="countdown-card">
+            <div class="countdown-number" id="cdSeconds">00</div>
+            <div class="countdown-label">Detik</div>
+          </div>
+        </div>
+        <div id="countdownDone" style="display: none">
+          <h3 class="section-heading">Alhamdulillah</h3>
+          <p class="countdown-intro" style="margin-bottom: 0">
+            Hari bahagia telah tiba. Terima kasih atas doa dan restu
+            Bapak/Ibu/Saudara/i.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BRIDE & GROOM -->
+    <section id="profiles">
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <div class="section-eyebrow">Two Hearts, One Soul</div>
+          <h2 class="section-heading">The Bride &amp; Groom</h2>
+          <div class="section-divider">
+            <span class="line"></span><i class="fa-solid fa-heart"></i
+            ><span class="line"></span>
+          </div>
+        </div>
+        <p class="profile-quote" data-aos="fade-up">
+          Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan.
+          Ya Allah semoga ridho-Mu tercurah mengiringi pernikahan kami
+        </p>
+        <div class="profile-grid" id="profileGrid"></div>
+      </div>
+    </section>
+
+    <!-- WEDDING EVENT -->
+    <section id="events">
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <div class="section-eyebrow">We Invite You</div>
+          <h2 class="section-heading">Wedding Event</h2>
+          <div class="section-divider">
+            <span class="line"></span><i class="fa-solid fa-heart"></i
+            ><span class="line"></span>
+          </div>
+        </div>
+        <p class="events-intro" data-aos="fade-up">
+          Dengan memohon rahmat dan ridho Allah SWT, kami mengundang
+          Bapak/Ibu/Saudara/i, untuk menghadiri acara pernikahan kami:
+        </p>
+        <div class="event-grid" id="eventGrid"></div>
+      </div>
+    </section>
+
+    <!-- LOVE STORY -->
+    <section id="love-story">
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <div class="section-eyebrow">A Journey of Love</div>
+          <h2 class="section-heading">Our Love Story</h2>
+          <div class="section-divider">
+            <span class="line"></span><i class="fa-solid fa-heart"></i
+            ><span class="line"></span>
+          </div>
+        </div>
+        <div class="timeline" id="storyTimeline"></div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery">
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <div class="section-eyebrow">Captured Moments</div>
+          <h2 class="section-heading">Our Gallery</h2>
+          <div class="section-divider">
+            <span class="line"></span><i class="fa-solid fa-heart"></i
+            ><span class="line"></span>
+          </div>
+        </div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+      </div>
+    </section>
+
+    <!-- DOA UNTUK PENGANTIN -->
+    <section id="doa-pengantin">
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <div class="section-eyebrow">Barakallahu Lakuma</div>
+          <h2 class="section-heading">Doa Untuk Pengantin</h2>
+          <div class="section-divider">
+            <span class="line"></span><i class="fa-solid fa-hands-praying"></i
+            ><span class="line"></span>
+          </div>
+        </div>
+        <p class="doa-arabic" lang="ar" dir="rtl" data-aos="fade-up">
+          بَارَكَ اللَّهُ لَكَ وَبَارَكَ عَلَيْكَ وَجَمَعَ بَيْنَكُمَا فِي خَيْر
+        </p>
+        <p class="doa-translate" data-aos="fade-up">
+          Mudah-mudahan Allah memberkahi engkau dalam segala hal (yang baik) dan
+          mempersatukan kamu berdua dalam kebaikan.
+        </p>
+      </div>
+    </section>
+
+    <!-- RSVP -->
+    <section id="rsvp">
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <div class="section-eyebrow">Be Our Guest</div>
+          <h2 class="section-heading">
+            Confirm Your<br />Attendance &amp; Wishes
+          </h2>
+          <div class="section-divider">
+            <span class="line"></span><i class="fa-solid fa-heart"></i
+            ><span class="line"></span>
+          </div>
+        </div>
+        <div class="rsvp-grid">
+          <form class="rsvp-form" id="rsvpForm" novalidate>
+            <div class="form-group">
+              <label class="form-label" for="rsvpName">Nama Lengkap</label>
+              <input
+                class="form-input"
+                type="text"
+                id="rsvpName"
+                placeholder="Tulis nama Anda" />
+              <div class="form-error" id="errName">Mohon isi nama Anda</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="rsvpAttendance"
+                >Konfirmasi Kehadiran</label
+              >
+              <select class="form-select" id="rsvpAttendance">
+                <option value="">— Pilih Kehadiran —</option>
+                <option value="hadir">Hadir</option>
+                <option value="ragu">Masih Ragu</option>
+                <option value="tidak">Berhalangan</option>
+              </select>
+              <div class="form-error" id="errAttendance">
+                Mohon pilih konfirmasi kehadiran
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="rsvpMessage"
+                >Ucapan &amp; Doa</label
+              >
+              <textarea
+                class="form-textarea"
+                id="rsvpMessage"
+                placeholder="Tuliskan doa & ucapan terbaik Anda untuk kami"></textarea>
+              <div class="form-error" id="errMsg">
+                Mohon tuliskan ucapan &amp; doa Anda
+              </div>
+            </div>
+            <button class="btn-submit" type="submit">
+              <i class="fa-solid fa-paper-plane"></i
+              ><span>Kirim Ucapan &amp; Doa</span>
+            </button>
+          </form>
+          <div class="wishes-panel" data-aos="fade-up">
+            <div class="wishes-header">
+              <div class="wishes-title">Ucapan &amp; Doa</div>
+              <div class="wishes-count" id="wishCount">0 Doa</div>
+            </div>
+            <div class="wishes-list" id="wishesList"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GIFT -->
+    <section id="gift">
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <div class="section-eyebrow">With Gratitude</div>
+          <h2 class="section-heading">Wedding Gift</h2>
+          <div class="section-divider">
+            <span class="line"></span><i class="fa-solid fa-heart"></i
+            ><span class="line"></span>
+          </div>
+        </div>
+        <div class="gift-card" data-aos="fade-up">
+          <div class="gift-icon"><i class="fa-solid fa-gift"></i></div>
+          <p class="gift-text">
+            Doa dan restu Anda adalah hadiah terindah bagi kami. Namun, jika
+            ingin memberikan tanda kasih, kami dengan senang hati menerimanya.
+          </p>
+          <button class="btn-gift" id="btnGift">
+            <i class="fa-solid fa-envelope-open-text"></i
+            ><span>Kirim Hadiah</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- THANK YOU SECTION -->
+    <section id="closing">
+      <div class="container">
+        <p class="closing-quote" data-aos="fade-up">
+          &ldquo;Dan di antara tanda-tanda kekuasaan-Nya diciptakan-Nya untukmu
+          pasangan hidup dari jenismu sendiri, supaya kamu cenderung dan merasa
+          tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan
+          sayang.&rdquo;
+        </p>
+        <div class="closing-surah" data-aos="fade-up">
+          &mdash; Q.S. Ar-Rum : 21
+        </div>
+        <div class="closing-divider" data-aos="fade-up"></div>
+        <p class="closing-note" data-aos="fade-up">
+          Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
+          Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada
+          kedua mempelai.
+        </p>
+        <div class="closing-eyebrow" data-aos="fade-up">
+          Kami Yang Berbahagia,
+        </div>
+        <div class="closing-names" id="closingNames" data-aos="fade-up">
+          Angga &amp; Neska
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-brand">
+          <a
+            class="footer-brand-link"
+            href="https://madebynurra.my.id"
+            target="_blank"
+            rel="noopener"
+            aria-label="Made by Nurra — kunjungi website">
+            <img
+              class="footer-brand-logo"
+              alt="made by nurra"
+              src="logo_madebynurra.png"
+              onerror="
+                if (!this.dataset.fb) {
+                  this.dataset.fb = '1';
+                  this.src =
+                    'https://z-cdn-media.chatglm.cn/files/b6668319-45a1-47e5-9a2b-eed5118e31db.png?auth_key=1890493811-75d25d5434ae468d9b2bc06c04446578-0-39aec28c92942529bffc7f13f6252245';
+                } else {
+                  this.style.display = 'none';
+                  var t = document.getElementById('footerBrandText');
+                  if (t) {
+                    t.style.display = 'flex';
+                  }
+                }
+              " />
+            <div class="footer-brand-text" id="footerBrandText">
+              <span class="footer-brand-made">made by</span>
+              <span class="footer-brand-nurra">nurra</span>
+            </div>
+          </a>
+        </div>
+        <div class="footer-thanks">Terima Kasih</div>
+        <div class="footer-names" id="footerNames">Angga &amp; Neska</div>
+        <div class="footer-date" id="footerDate">14 . 11 . 2026</div>
+        <div class="footer-divider"></div>
+        <div class="footer-credit">
+          <a href="https://madebynurra.my.id" target="_blank" rel="noopener"
+            >Made By Nurra &mdash; Premium Wedding Invitation</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- GIFT MODAL -->
+    <div class="modal-overlay" id="giftModal" role="dialog" aria-modal="true">
+      <div class="modal">
+        <button class="modal-close" id="giftModalClose" aria-label="Tutup">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="modal-title">Wedding Gift</div>
+        <!-- <div class="modal-subtitle">Amplop Digital &amp; Kado</div> -->
+        <div id="giftModalBody"></div>
+      </div>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+      <button
+        class="lightbox-btn lightbox-close"
+        id="lightboxClose"
+        aria-label="Tutup">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <button
+        class="lightbox-btn lightbox-prev"
+        id="lightboxPrev"
+        aria-label="Sebelumnya">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <img class="lightbox-img" id="lightboxImg" alt="Foto galeri" src="" />
+      <button
+        class="lightbox-btn lightbox-next"
+        id="lightboxNext"
+        aria-label="Berikutnya">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+      <div class="lightbox-counter" id="lightboxCounter"></div>
+    </div>
+
+    <!-- DRAWER NAVIGATION -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <nav class="bottom-drawer" id="bottomDrawer">
+      <div class="drawer-handle"></div>
+      <div class="drawer-label">Navigation</div>
+      <div class="drawer-content" id="drawerContent"></div>
+    </nav>
+
+    <!-- HAMBURGER -->
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu navigasi">
+      <span class="music-indicator"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+      <i class="fa-solid fa-circle-check"></i><span id="toastMsg"></span>
+    </div>
+
+    <!-- PETALS -->
+    <div class="petals-container" id="petalsContainer"></div>
+
+    <!-- MUSIC -->
+    <audio id="bgMusic" loop preload="none"></audio>
+
+    <!-- FIREBASE (compat SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+    <script>
+      (function () {
+        "use strict";
+
+        var DEFAULT_CONFIG = {
+          weddingDate: "2026-11-14T08:00:00+07:00",
+          music: "",
+          hero: {
+            bg: "https://file.garden/alY9SkoxwgtjCGxf/Sani%20%26%20Warham/hero.PNG",
+            date: "14 . 11 . 2026",
+            groomName: "",
+            brideName: "",
+          },
+          couple: {
+            groomName: "Angga Pratama Putra",
+            groomNick: "Angga",
+            groomPhoto: "",
+            groomIg: "",
+            groomOrder: "pertama",
+            groomFather: "Nama Ayah",
+            groomMother: "Nama Ibu",
+
+            brideName: "Neli Eriska",
+            brideNick: "Neska",
+            bridePhoto: "",
+            brideIg: "",
+            brideOrder: "kedua",
+            brideFather: "Nama Ayah",
+            brideMother: "Nama Ibu",
+          },
+          events: [
+            {
+              title: "Akad Nikah",
+              icon: "fa-solid fa-book-quran",
+              date: "Sabtu, 14 November 2026",
+              time: "08.00 WIB — Selesai",
+              address:
+                "Kp Jalan Cagak 004/001, Desa Tenjonagara, Kec. Cigalontang, Kab. Tasikmalaya",
+              maps: "https://maps.google.com/?q=Tenjonagara,+Cigalontang,+Tasikmalaya",
+            },
+            {
+              title: "Resepsi",
+              icon: "fa-solid fa-champagne-glasses",
+              date: "Sabtu, 14 November 2026",
+              time: "11.00 WIB — Selesai",
+              address:
+                "Kp Jalan Cagak 004/001, Desa Tenjonagara, Kec. Cigalontang, Kab. Tasikmalaya",
+              maps: "https://maps.google.com/?q=Tenjonagara,+Cigalontang,+Tasikmalaya",
+            },
+          ],
+          story: [
+            {
+              year: "2019",
+              title: "Awal Bertemu",
+              desc: "Kami dipertemukan dalam kesempatan sederhana yang tak pernah kami sangka akan menjadi awal dari segalanya.",
+            },
+            {
+              year: "2021",
+              title: "Semakin Dekat",
+              desc: "Persahabatan tumbuh perlahan menjadi rasa. Obrolan ringan demi satu sama lain perlahan menjadi rutinitas yang kami tunggu.",
+            },
+            {
+              year: "2024",
+              title: "Lamaran",
+              desc: "Dengan restu kedua orang tua, kami mengambil langkah serius untuk saling menjaga dalam ikatan yang halal.",
+            },
+            {
+              year: "2026",
+              title: "Menuju Pelaminan",
+              desc: "Dan kini, kami mengundang Anda untuk menjadi saksi ikrar janji suci kami. InsyaAllah.",
+            },
+          ],
+          gallery: [],
+          gift: {
+            banks: [],
+            giftAddress: {
+              address:
+                "Kp Jalan Cagak 004/001, Desa Tenjonagara, Kecamatan Cigalontang, Kabupaten Tasikmalaya",
+              recipient: "Neli Eriska",
+            },
+          },
+          dressCode: {
+            colors: ["#9B4937", "#C8755B", "#E8B5A2", "#D9C5A0", "#B59A70"],
+          },
+        };
+
+        var CONFIG = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+
+        function $(id) {
+          return document.getElementById(id);
+        }
+        function esc(str) {
+          return String(str == null ? "" : str)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+        }
+        function safeUrl(u) {
+          var s = String(u || "").trim();
+          return /^(https?:\/\/|mailto:|tel:|#|\/)/i.test(s) ? s : "#";
+        }
+        function safeIcon(icon, fallback) {
+          var s = String(icon || "").trim();
+          return /^fa-[a-z0-9 -]+$/i.test(s) ? s : fallback;
+        }
+        function deepMerge(target, source) {
+          for (var key in source) {
+            if (
+              source[key] &&
+              typeof source[key] === "object" &&
+              !Array.isArray(source[key])
+            ) {
+              if (!target[key] || typeof target[key] !== "object") {
+                target[key] = {};
+              }
+              deepMerge(target[key], source[key]);
+            } else if (source[key] !== undefined && source[key] !== null) {
+              target[key] = source[key];
+            }
+          }
+          return target;
+        }
+        function normalizeAddress(str) {
+          return String(str || "")
+            .replace(/\s+/g, " ")
+            .trim();
+        }
+        function formatFooterDate(iso) {
+          var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso || ""));
+          if (!m) return "";
+          return m[3] + " . " + m[2] + " . " + m[1];
+        }
+
+        var ID_MONTHS = {
+          januari: "01",
+          februari: "02",
+          maret: "03",
+          april: "04",
+          mei: "05",
+          juni: "06",
+          juli: "07",
+          agustus: "08",
+          september: "09",
+          oktober: "10",
+          november: "11",
+          desember: "12",
+        };
+        function getFooterDate() {
+          var d = formatFooterDate(CONFIG.weddingDate);
+          if (d) return d;
+
+          var source = (CONFIG.hero && CONFIG.hero.date) || "";
+          if (!source) {
+            var evs = Array.isArray(CONFIG.events) ? CONFIG.events : [];
+            for (var i = 0; i < evs.length; i++) {
+              if (evs[i] && evs[i].date) {
+                source = evs[i].date;
+                break;
+              }
+            }
+          }
+          var m = /(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})/.exec(String(source));
+          if (m) {
+            var mm = ID_MONTHS[String(m[2]).toLowerCase()];
+            if (mm) {
+              var dd = m[1].length < 2 ? "0" + m[1] : m[1];
+              return dd + " . " + mm + " . " + m[3];
+            }
+          }
+          return "";
+        }
+
+        function svgPlaceholder(w, h, inner) {
+          return (
+            "data:image/svg+xml;charset=utf-8," +
+            encodeURIComponent(
+              '<svg xmlns="http://www.w3.org/2000/svg" width="' +
+                w +
+                '" height="' +
+                h +
+                '">' +
+                inner +
+                "</svg>",
+            )
+          );
+        }
+        function placeholderAvatar(name) {
+          var initial = esc(
+            (
+              String(name || "W")
+                .trim()
+                .charAt(0) || "W"
+            ).toUpperCase(),
+          );
+          return svgPlaceholder(
+            440,
+            560,
+            '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">' +
+              '<stop offset="0" stop-color="#9B4937"/><stop offset="1" stop-color="#6B3325"/></linearGradient></defs>' +
+              '<rect width="440" height="560" fill="url(#g)"/>' +
+              '<circle cx="220" cy="200" r="86" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>' +
+              '<text x="220" y="232" font-family="Georgia, serif" font-size="92" fill="rgba(255,255,255,0.95)" text-anchor="middle">' +
+              initial +
+              "</text>" +
+              '<text x="220" y="500" font-family="Georgia, serif" font-size="20" letter-spacing="8" fill="rgba(255,255,255,0.5)" text-anchor="middle">WEDDING</text>',
+          );
+        }
+        function placeholderGalleryPhoto(i) {
+          var palettes = [
+            ["#F5EBD8", "#E8B5A2", "#C8755B"],
+            ["#ECE6D2", "#D9C5A0", "#B59A70"],
+            ["#F5EBD8", "#D9C5A0", "#B59A70"],
+            ["#F5EBD8", "#E8B5A2", "#9B4937"],
+          ];
+          var p = palettes[i % palettes.length];
+          return svgPlaceholder(
+            600,
+            1000,
+            '<defs><linearGradient id="g' +
+              i +
+              '" x1="0" y1="0" x2="1" y2="1">' +
+              '<stop offset="0" stop-color="' +
+              p[0] +
+              '"/><stop offset="1" stop-color="' +
+              p[1] +
+              '"/></linearGradient></defs>' +
+              '<rect width="600" height="1000" fill="url(#g' +
+              i +
+              ')"/>' +
+              '<text x="300" y="520" font-family="Georgia, serif" font-size="110" fill="' +
+              p[2] +
+              '" opacity="0.45" text-anchor="middle">&#9825;</text>',
+          );
+        }
+
+        var urlParams = new URLSearchParams(window.location.search);
+        var coupleSlug =
+          (urlParams.get("couple") || "default")
+            .replace(/[^a-zA-Z0-9_-]/g, "")
+            .slice(0, 50) || "default";
+        var guestName = (urlParams.get("to") || "")
+          .replace(/\+/g, " ")
+          .trim()
+          .slice(0, 60);
+
+        var firebaseConfig = {
+          apiKey: "AIzaSyCOBF0QgZ0k4Tq-lQQmEzKd0hXHcWMl7dY",
+          authDomain: "wedding-v3-2f304.firebaseapp.com",
+          databaseURL:
+            "https://wedding-v3-2f304-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "wedding-v3-2f304",
+          storageBucket: "wedding-v3-2f304.firebasestorage.app",
+          messagingSenderId: "607206244280",
+          appId: "1:607206244280:web:dd20a4b38529314304594d",
+          measurementId: "G-VLH2VKVXJ3",
+        };
+        var db = null;
+        try {
+          if (
+            window.firebase &&
+            typeof firebase.initializeApp === "function" &&
+            firebaseConfig.databaseURL
+          ) {
+            firebase.initializeApp(firebaseConfig);
+            db = firebase.database();
+          }
+        } catch (err) {
+          console.warn("[Firebase] init gagal, memakai DEFAULT_CONFIG:", err);
+        }
+
+        function loadRemoteConfig() {
+          return new Promise(function (resolve) {
+            if (!db) return resolve(null);
+            var settled = false;
+            var done = function (v) {
+              if (!settled) {
+                settled = true;
+                resolve(v);
+              }
+            };
+            var timer = setTimeout(function () {
+              done(null);
+            }, 6000);
+            try {
+              db.ref("v15/" + coupleSlug)
+                .once("value")
+                .then(function (snap) {
+                  clearTimeout(timer);
+                  done(snap.val());
+                })
+                .catch(function () {
+                  clearTimeout(timer);
+                  done(null);
+                });
+            } catch (e) {
+              clearTimeout(timer);
+              done(null);
+            }
+          });
+        }
+
+        var DRESS_CODE_COLORS = [
+          "#9B4937",
+          "#C8755B",
+          "#E8B5A2",
+          "#D9C5A0",
+          "#B59A70",
+        ];
+
+        function applyCoupleInfo() {
+          var c = CONFIG.couple || {};
+          var h = CONFIG.hero || {};
+
+          var gNick = c.groomNick || c.groomName || "Groom";
+          var bNick = c.brideNick || c.brideName || "Bride";
+
+          var gFull = h.groomName || c.groomName || gNick;
+          var bFull = h.brideName || c.brideName || bNick;
+
+          document.title = "The Wedding of " + gNick + " & " + bNick;
+          $("coverGroom").textContent = gNick;
+          $("coverBride").textContent = bNick;
+          $("heroGroom").textContent = gFull;
+          $("heroBride").textContent = bFull;
+
+          var heroDateVal =
+            getFooterDate() || (CONFIG.hero && CONFIG.hero.date) || "";
+          $("heroDate").textContent = heroDateVal;
+
+          $("coverGuest").textContent = guestName || "Tamu Undangan";
+          if (guestName) $("rsvpName").value = guestName;
+
+          var closingNames = $("closingNames");
+          if (closingNames) closingNames.textContent = gNick + " & " + bNick;
+          var footerNames = $("footerNames");
+          if (footerNames) footerNames.textContent = gNick + " & " + bNick;
+
+          var footerDate = $("footerDate");
+          if (footerDate) {
+            footerDate.textContent = CONFIG.footerDate || getFooterDate();
+          }
+
+          var heroBg =
+            (CONFIG.hero && CONFIG.hero.bg) ||
+            "https://file.garden/alY9SkoxwgtjCGxf/Sani%20%26%20Warham/hero.PNG";
+          $("hero").style.backgroundImage = 'url("' + heroBg + '")';
+        }
+
+        function createProfileCard(data) {
+          var card = document.createElement("div");
+          card.className = "profile-card";
+          card.setAttribute("data-aos", "fade-up");
+
+          var photoWrap = document.createElement("div");
+          photoWrap.className = "profile-photo-wrap";
+          var photoBox = document.createElement("div");
+          photoBox.className = "profile-photo";
+          var img = document.createElement("img");
+          img.alt = data.name;
+          img.loading = "lazy";
+          img.src = data.photo || placeholderAvatar(data.name);
+          img.onerror = function () {
+            img.onerror = null;
+            img.src = placeholderAvatar(data.name);
+          };
+          photoBox.appendChild(img);
+          photoWrap.appendChild(photoBox);
+          card.appendChild(photoWrap);
+
+          var role = document.createElement("div");
+          role.className = "profile-role";
+          role.textContent = data.role;
+          card.appendChild(role);
+
+          var name = document.createElement("h3");
+          name.className = "profile-name";
+          name.textContent = data.name;
+          card.appendChild(name);
+
+          if (data.orderText) {
+            var order = document.createElement("p");
+            order.className = "profile-order";
+            order.textContent = data.orderText;
+            card.appendChild(order);
+          }
+
+          if (data.parentsLine) {
+            var parents = document.createElement("p");
+            parents.className = "profile-parents";
+            parents.textContent = data.parentsLine;
+            card.appendChild(parents);
+          }
+
+          if (data.ig) {
+            var handle = String(data.ig).replace(/^@/, "");
+            var ig = document.createElement("a");
+            ig.className = "profile-ig";
+            ig.href = "https://instagram.com/" + encodeURIComponent(handle);
+            ig.target = "_blank";
+            ig.rel = "noopener";
+            ig.innerHTML =
+              '<i class="fa-brands fa-instagram"></i><span>@' +
+              esc(handle) +
+              "</span>";
+            card.appendChild(ig);
+          }
+          return card;
+        }
+
+        function buildOrderText(gender, order) {
+          order = order || "";
+          if (!order) return "";
+          return (gender === "bride" ? "Putri " : "Putra ") + order + " dari";
+        }
+        function buildParentsLine(father, mother) {
+          var parts = [];
+          if (father) parts.push("Bapak " + father);
+          if (mother) parts.push("Ibu " + mother);
+          return parts.join(" & ");
+        }
+
+        function renderProfiles() {
+          var c = CONFIG.couple || {};
+          var grid = $("profileGrid");
+          grid.innerHTML = "";
+
+          grid.appendChild(
+            createProfileCard({
+              role: "The Groom",
+              name: c.groomName || c.groomNick || "",
+              photo: c.groomPhoto || "",
+              orderText: buildOrderText("groom", c.groomOrder || ""),
+              parentsLine: buildParentsLine(
+                c.groomFather || "",
+                c.groomMother || "",
+              ),
+              ig: c.groomIg || "",
+            }),
+          );
+          grid.appendChild(
+            createProfileCard({
+              role: "The Bride",
+              name: c.brideName || c.brideNick || "",
+              photo: c.bridePhoto || "",
+              orderText: buildOrderText("bride", c.brideOrder || ""),
+              parentsLine: buildParentsLine(
+                c.brideFather || "",
+                c.brideMother || "",
+              ),
+              ig: c.brideIg || "",
+            }),
+          );
+        }
+
+        function createEventCard(ev) {
+          ev = ev || {};
+          var card = document.createElement("div");
+          card.className = "event-card";
+          card.setAttribute("data-aos", "fade-up");
+          var html =
+            '<div class="event-icon"><i class="' +
+            safeIcon(ev.icon, "fa-solid fa-calendar-day") +
+            '"></i></div>';
+          html +=
+            '<h3 class="event-title">' + esc(ev.title || "Acara") + "</h3>";
+          if (ev.date)
+            html +=
+              '<div class="event-row"><i class="fa-solid fa-calendar-day"></i><span>' +
+              esc(ev.date) +
+              "</span></div>";
+          if (ev.time)
+            html +=
+              '<div class="event-row"><i class="fa-regular fa-clock"></i><span>' +
+              esc(ev.time) +
+              "</span></div>";
+          if (ev.address)
+            html += '<p class="event-address">' + esc(ev.address) + "</p>";
+          if (ev.maps)
+            html +=
+              '<a class="btn-location" href="' +
+              esc(safeUrl(ev.maps)) +
+              '" target="_blank" rel="noopener"><i class="fa-solid fa-location-dot"></i>Lihat Lokasi</a>';
+          card.innerHTML = html;
+          return card;
+        }
+
+        function createDressCodeCard() {
+          var colors = DRESS_CODE_COLORS;
+          if (
+            CONFIG.dressCode &&
+            Array.isArray(CONFIG.dressCode.colors) &&
+            CONFIG.dressCode.colors.length
+          ) {
+            var filtered = CONFIG.dressCode.colors.filter(function (c) {
+              return /^#([0-9a-f]{3}|[0-9a-f]{6}|[0-9a-f]{8})$/i.test(
+                String(c),
+              );
+            });
+            if (filtered.length) colors = filtered;
+          }
+          var card = document.createElement("div");
+          card.className = "event-card dress-code-card";
+          card.setAttribute("data-aos", "fade-up");
+          card.innerHTML =
+            '<div class="event-icon"><i class="fa-solid fa-shirt"></i></div>' +
+            '<h3 class="event-title">Dress Code</h3>' +
+            '<p class="dress-code-text">Kami dengan hormat menganjurkan tamu kami untuk mengenakan warna-warna ini untuk hari istimewa kami</p>' +
+            '<div class="dress-colors">' +
+            colors
+              .map(function (c) {
+                return (
+                  '<span class="dress-swatch" style="background: ' +
+                  esc(c) +
+                  '"></span>'
+                );
+              })
+              .join("") +
+            "</div>";
+          return card;
+        }
+
+        function renderEvents() {
+          var grid = $("eventGrid");
+          grid.innerHTML = "";
+          (Array.isArray(CONFIG.events) ? CONFIG.events : []).forEach(
+            function (ev) {
+              grid.appendChild(createEventCard(ev));
+            },
+          );
+          grid.appendChild(createDressCodeCard());
+        }
+
+        function renderStory() {
+          var tl = $("storyTimeline");
+          tl.innerHTML = "";
+          (Array.isArray(CONFIG.story) ? CONFIG.story : []).forEach(
+            function (s) {
+              var item = document.createElement("div");
+              item.className = "timeline-item";
+              item.setAttribute("data-aos", "fade-up");
+              item.innerHTML =
+                '<div class="timeline-dot"></div>' +
+                '<div class="timeline-content">' +
+                '<div class="timeline-year">' +
+                esc(s.year || "") +
+                "</div>" +
+                '<h4 class="timeline-title">' +
+                esc(s.title || "") +
+                "</h4>" +
+                '<p class="timeline-desc">' +
+                esc(s.desc || s.text || "") +
+                "</p>" +
+                "</div>";
+              tl.appendChild(item);
+            },
+          );
+        }
+
+        var galleryImages = [];
+
+        function renderGallery() {
+          var grid = $("galleryGrid");
+          grid.innerHTML = "";
+          var raw = Array.isArray(CONFIG.gallery) ? CONFIG.gallery : [];
+          galleryImages = raw
+            .map(function (item) {
+              if (typeof item === "string") return item;
+              return (item && (item.src || item.url)) || "";
+            })
+            .filter(Boolean);
+
+          if (!galleryImages.length) {
+            for (var i = 0; i < 6; i++)
+              galleryImages.push(placeholderGalleryPhoto(i));
+          }
+
+          galleryImages.forEach(function (src, i) {
+            var figure = document.createElement("div");
+            figure.className = "gallery-item";
+            figure.setAttribute("data-aos", "zoom-in");
+            figure.setAttribute("data-aos-delay", String((i % 4) * 60));
+            var img = document.createElement("img");
+            img.src = src;
+            img.alt = "Galeri pernikahan " + (i + 1);
+            img.loading = "lazy";
+            img.onerror = function () {
+              img.onerror = null;
+              img.src = placeholderGalleryPhoto(i);
+            };
+            figure.appendChild(img);
+            var zoom = document.createElement("div");
+            zoom.className = "zoom-icon";
+            zoom.innerHTML =
+              '<i class="fa-solid fa-magnifying-glass-plus"></i>';
+            figure.appendChild(zoom);
+            figure.addEventListener("click", function () {
+              openLightbox(i);
+            });
+            grid.appendChild(figure);
+          });
+        }
+
+        function renderGiftModal() {
+          var gift = CONFIG.gift || {};
+          var banks = Array.isArray(gift.banks) ? gift.banks : [];
+          var body = $("giftModalBody");
+          var html = "";
+
+          if (banks.length) {
+            html += '<div class="modal-section-label">Amplop Digital</div>';
+            banks.forEach(function (b) {
+              b = b || {};
+              html +=
+                '<div class="bank-card">' +
+                '<div class="bank-name">' +
+                esc(b.bank || b.name || "Bank") +
+                "</div>" +
+                '<div class="bank-number">' +
+                esc(b.number || "") +
+                "</div>" +
+                '<div class="bank-holder">a.n. ' +
+                esc(b.holder || "") +
+                "</div>" +
+                '<button class="btn-copy" type="button" data-copy="' +
+                esc(b.number || "") +
+                '" data-msg="Nomor rekening berhasil disalin">' +
+                '<i class="fa-regular fa-copy"></i> Salin Nomor</button>' +
+                "</div>";
+            });
+          }
+
+          var addr = gift.giftAddress || {};
+          var addressText = "";
+          if (typeof addr.address === "string" && addr.address.trim()) {
+            addressText = normalizeAddress(addr.address);
+          } else if (Array.isArray(addr.lines) && addr.lines.length) {
+            addressText = addr.lines
+              .map(function (l) {
+                return normalizeAddress(l);
+              })
+              .filter(Boolean)
+              .join(", ");
+          }
+          var recipient =
+            typeof addr.recipient === "string"
+              ? normalizeAddress(addr.recipient)
+              : "";
+
+          if (addressText || recipient) {
+            var copyValue = addressText;
+            if (recipient) {
+              copyValue = copyValue
+                ? copyValue + ", Atas Nama " + recipient
+                : "Atas Nama " + recipient;
+            }
+
+            html +=
+              '<div class="modal-section-label">Kirim Kado</div>' +
+              '<div class="address-card">';
+            if (addressText)
+              html += '<p class="address-text">' + esc(addressText) + "</p>";
+            if (recipient)
+              html +=
+                '<div class="address-recipient">Atas Nama: ' +
+                esc(recipient) +
+                "</div>";
+            html +=
+              '<button class="btn-copy" type="button" data-copy="' +
+              esc(copyValue) +
+              '" data-msg="Alamat berhasil disalin">' +
+              '<i class="fa-regular fa-copy"></i> Salin Alamat</button>' +
+              "</div>";
+          }
+
+          body.innerHTML = html;
+        }
+
+        var countdownTimer = null;
+        function startCountdown() {
+          var grid = $("countdownGrid");
+          var target = new Date(CONFIG.weddingDate || "").getTime();
+          if (isNaN(target)) {
+            grid.style.display = "none";
+            return;
+          }
+          var els = {
+            d: $("cdDays"),
+            h: $("cdHours"),
+            m: $("cdMinutes"),
+            s: $("cdSeconds"),
+          };
+          function pad(n) {
+            return String(n).padStart(2, "0");
+          }
+          function tick() {
+            var diff = target - Date.now();
+            if (diff <= 0) {
+              clearInterval(countdownTimer);
+              grid.style.display = "none";
+              $("countdownIntro").style.display = "none";
+              $("countdownDone").style.display = "block";
+              return;
+            }
+            els.d.textContent = pad(Math.floor(diff / 86400000));
+            els.h.textContent = pad(Math.floor(diff / 3600000) % 24);
+            els.m.textContent = pad(Math.floor(diff / 60000) % 60);
+            els.s.textContent = pad(Math.floor(diff / 1000) % 60);
+          }
+          tick();
+          countdownTimer = setInterval(tick, 1000);
+        }
+
+        var ATTENDANCE_LABEL = {
+          hadir: "Hadir",
+          tidak: "Berhalangan",
+          ragu: "Masih Ragu",
+        };
+
+        function localWishKey() {
+          return "wedding_wishes_" + coupleSlug;
+        }
+        function getLocalWishes() {
+          try {
+            return JSON.parse(localStorage.getItem(localWishKey())) || [];
+          } catch (e) {
+            return [];
+          }
+        }
+        function saveLocalWishes(list) {
+          try {
+            localStorage.setItem(
+              localWishKey(),
+              JSON.stringify(list.slice(0, 60)),
+            );
+          } catch (e) {}
+        }
+
+        function renderWishes(list) {
+          var wrap = $("wishesList");
+          $("wishCount").textContent = list.length + " Doa";
+          if (!list.length) {
+            wrap.innerHTML =
+              '<p class="wishes-empty">Belum ada ucapan &amp; doa.<br />Jadilah yang pertama mengirimkan doa terbaik Anda.</p>';
+            return;
+          }
+          wrap.innerHTML = list
+            .map(function (w) {
+              w = w || {};
+              var known = w.attendance && ATTENDANCE_LABEL[w.attendance];
+              return (
+                '<div class="wish-item">' +
+                '<div class="wish-head">' +
+                '<div class="wish-name">' +
+                esc(w.name || "Anonim") +
+                "</div>" +
+                (known
+                  ? '<span class="wish-attendance ' +
+                    esc(w.attendance) +
+                    '">' +
+                    esc(ATTENDANCE_LABEL[w.attendance]) +
+                    "</span>"
+                  : "") +
+                "</div>" +
+                '<p class="wish-message">' +
+                esc(w.message || "") +
+                "</p>" +
+                "</div>"
+              );
+            })
+            .join("");
+        }
+
+        function loadWishes() {
+          if (!db) {
+            renderWishes(getLocalWishes());
+            return;
+          }
+          try {
+            db.ref("v15/" + coupleSlug + "/wishes")
+              .limitToLast(60)
+              .on(
+                "value",
+                function (snap) {
+                  var val = snap.val() || {};
+                  var arr = Object.keys(val)
+                    .map(function (k) {
+                      var o = val[k];
+                      return o && typeof o === "object" ? o : null;
+                    })
+                    .filter(Boolean);
+                  arr.sort(function (a, b) {
+                    return (b.createdAt || 0) - (a.createdAt || 0);
+                  });
+                  renderWishes(arr);
+                },
+                function (err) {
+                  console.warn("[Firebase] wishes:", err);
+                  renderWishes(getLocalWishes());
+                },
+              );
+          } catch (e) {
+            renderWishes(getLocalWishes());
+          }
+        }
+
+        function initRSVP() {
+          var form = $("rsvpForm");
+          var btn = form.querySelector(".btn-submit");
+          var btnOriginal = btn.innerHTML;
+
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            var name = $("rsvpName").value.trim();
+            var attendance = $("rsvpAttendance").value;
+            var message = $("rsvpMessage").value.trim();
+
+            var ok = true;
+            $("errName").classList.toggle("show", !name);
+            if (!name) ok = false;
+            $("errAttendance").classList.toggle("show", !attendance);
+            if (!attendance) ok = false;
+            $("errMsg").classList.toggle("show", !message);
+            if (!message) ok = false;
+            if (!ok) return;
+
+            var data = {
+              name: name,
+              attendance: attendance,
+              message: message,
+              createdAt: Date.now(),
+            };
+
+            btn.disabled = true;
+            btn.innerHTML =
+              '<i class="fa-solid fa-spinner fa-spin"></i><span>Mengirim...</span>';
+
+            function finish() {
+              btn.disabled = false;
+              btn.innerHTML = btnOriginal;
+            }
+
+            if (db) {
+              db.ref("v15/" + coupleSlug + "/wishes")
+                .push(data)
+                .then(function () {
+                  showToast("Terima kasih! Doa & ucapan Anda telah terkirim.");
+                  form.reset();
+                  if (guestName) $("rsvpName").value = guestName;
+                  finish();
+                })
+                .catch(function () {
+                  showToast("Gagal terkirim. Mohon coba lagi.");
+                  finish();
+                });
+            } else {
+              var local = getLocalWishes();
+              local.unshift(data);
+              saveLocalWishes(local);
+              renderWishes(local);
+              showToast("Terima kasih! Doa & ucapan Anda telah terkirim.");
+              form.reset();
+              if (guestName) $("rsvpName").value = guestName;
+              finish();
+            }
+          });
+        }
+
+        var currentIdx = 0;
+        function updateLightbox() {
+          if (!galleryImages.length) return;
+          currentIdx =
+            (currentIdx + galleryImages.length) % galleryImages.length;
+          $("lightboxImg").src = galleryImages[currentIdx];
+          $("lightboxCounter").textContent =
+            currentIdx + 1 + " / " + galleryImages.length;
+        }
+        function openLightbox(i) {
+          currentIdx = i;
+          updateLightbox();
+          $("lightbox").classList.add("active");
+          document.body.classList.add("no-scroll");
+        }
+        function closeLightbox() {
+          $("lightbox").classList.remove("active");
+          document.body.classList.remove("no-scroll");
+        }
+        function initLightbox() {
+          $("lightboxClose").addEventListener("click", closeLightbox);
+          $("lightboxPrev").addEventListener("click", function () {
+            currentIdx--;
+            updateLightbox();
+          });
+          $("lightboxNext").addEventListener("click", function () {
+            currentIdx++;
+            updateLightbox();
+          });
+          $("lightbox").addEventListener("click", function (e) {
+            if (e.target === $("lightbox")) closeLightbox();
+          });
+          document.addEventListener("keydown", function (e) {
+            if (!$("lightbox").classList.contains("active")) return;
+            if (e.key === "Escape") closeLightbox();
+            if (e.key === "ArrowLeft") {
+              currentIdx--;
+              updateLightbox();
+            }
+            if (e.key === "ArrowRight") {
+              currentIdx++;
+              updateLightbox();
+            }
+          });
+          var touchX = null;
+          $("lightbox").addEventListener(
+            "touchstart",
+            function (e) {
+              touchX = e.touches[0].clientX;
+            },
+            { passive: true },
+          );
+          $("lightbox").addEventListener(
+            "touchend",
+            function (e) {
+              if (touchX === null) return;
+              var dx = e.changedTouches[0].clientX - touchX;
+              if (Math.abs(dx) > 45) {
+                currentIdx += dx < 0 ? 1 : -1;
+                updateLightbox();
+              }
+              touchX = null;
+            },
+            { passive: true },
+          );
+        }
+
+        var bgMusic = $("bgMusic");
+        var hamburgerBtn = $("hamburgerBtn");
+        var drawerMusicBtn = null;
+
+        function initMusic() {
+          if (CONFIG.music) bgMusic.src = CONFIG.music;
+        }
+        function setMusicUI(on) {
+          hamburgerBtn.classList.toggle("music-on", on);
+          if (drawerMusicBtn) {
+            drawerMusicBtn.classList.toggle("playing", on);
+            var icon = drawerMusicBtn.querySelector("i");
+            if (icon)
+              icon.className = on ? "fa-solid fa-pause" : "fa-solid fa-music";
+          }
+        }
+        function tryPlayMusic() {
+          if (!bgMusic.src) return;
+          var p = bgMusic.play();
+          if (p && typeof p.then === "function") {
+            p.then(function () {
+              setMusicUI(true);
+            }).catch(function () {
+              setMusicUI(false);
+            });
+          }
+        }
+        function toggleMusic() {
+          if (!bgMusic.src) {
+            showToast("Musik belum tersedia");
+            return;
+          }
+          if (bgMusic.paused) {
+            tryPlayMusic();
+          } else {
+            bgMusic.pause();
+            setMusicUI(false);
+          }
+        }
+
+        var NAV_ITEMS = [
+          { id: "hero", label: "Beranda", icon: "fa-solid fa-house" },
+          { id: "profiles", label: "Mempelai", icon: "fa-solid fa-user-group" },
+          { id: "events", label: "Acara", icon: "fa-solid fa-calendar-day" },
+          { id: "love-story", label: "Cerita", icon: "fa-solid fa-heart" },
+          { id: "gallery", label: "Galeri", icon: "fa-solid fa-images" },
+          {
+            id: "doa-pengantin",
+            label: "Doa",
+            icon: "fa-solid fa-hands-praying",
+          },
+          { id: "rsvp", label: "RSVP", icon: "fa-solid fa-envelope-open-text" },
+          { id: "gift", label: "Gift", icon: "fa-solid fa-gift" },
+        ];
+        var NAV_SECTIONS = [
+          "hero",
+          "countdown",
+          "profiles",
+          "events",
+          "love-story",
+          "gallery",
+          "doa-pengantin",
+          "rsvp",
+          "gift",
+          "closing",
+        ];
+
+        function scrollToSection(id) {
+          var target = document.getElementById(id);
+          if (!target) return;
+          window.scrollTo({
+            top: id === "hero" ? 0 : target.offsetTop,
+            behavior: "smooth",
+          });
+        }
+        function openDrawerUI() {
+          $("bottomDrawer").classList.add("active");
+          $("drawerOverlay").classList.add("active");
+          hamburgerBtn.classList.add("active");
+          document.body.classList.add("drawer-open");
+        }
+        function closeDrawerUI() {
+          $("bottomDrawer").classList.remove("active");
+          $("drawerOverlay").classList.remove("active");
+          hamburgerBtn.classList.remove("active");
+          document.body.classList.remove("drawer-open");
+        }
+
+        function buildDrawer() {
+          var content = $("drawerContent");
+          content.innerHTML = "";
+          NAV_ITEMS.forEach(function (item) {
+            var b = document.createElement("button");
+            b.type = "button";
+            b.className = "drawer-nav-item";
+            b.setAttribute("data-target", item.id);
+            b.innerHTML =
+              '<span class="icon-wrap"><i class="' +
+              item.icon +
+              '"></i></span><span>' +
+              esc(item.label) +
+              "</span>";
+            b.addEventListener("click", function () {
+              closeDrawerUI();
+              setTimeout(function () {
+                scrollToSection(item.id);
+              }, 300);
+            });
+            content.appendChild(b);
+          });
+
+          drawerMusicBtn = document.createElement("button");
+          drawerMusicBtn.type = "button";
+          drawerMusicBtn.className = "drawer-music-btn";
+          drawerMusicBtn.innerHTML =
+            '<span class="icon-wrap"><i class="fa-solid fa-music"></i><span class="disc"></span></span><span>Musik</span>';
+          drawerMusicBtn.addEventListener("click", toggleMusic);
+          content.appendChild(drawerMusicBtn);
+        }
+
+        function updateActiveNav() {
+          var items = document.querySelectorAll(
+            ".drawer-nav-item[data-target]",
+          );
+          if (!items.length) return;
+          var y = window.scrollY || window.pageYOffset;
+          var current = "hero";
+          NAV_SECTIONS.forEach(function (id) {
+            var sec = document.getElementById(id);
+            if (sec && sec.offsetTop - 160 <= y) current = id;
+          });
+          items.forEach(function (b) {
+            b.classList.toggle(
+              "active",
+              b.getAttribute("data-target") === current,
+            );
+          });
+        }
+
+        var toastTimer = null;
+        function showToast(msg) {
+          $("toastMsg").textContent = msg;
+          var t = $("toast");
+          t.classList.add("show");
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(function () {
+            t.classList.remove("show");
+          }, 2600);
+        }
+
+        function initGiftModal() {
+          $("btnGift").addEventListener("click", function () {
+            $("giftModal").classList.add("active");
+            document.body.classList.add("no-scroll");
+          });
+          $("giftModalClose").addEventListener("click", function () {
+            $("giftModal").classList.remove("active");
+            document.body.classList.remove("no-scroll");
+          });
+          $("giftModal").addEventListener("click", function (e) {
+            if (e.target === $("giftModal")) {
+              $("giftModal").classList.remove("active");
+              document.body.classList.remove("no-scroll");
+            }
+          });
+          $("giftModalBody").addEventListener("click", function (e) {
+            var btn = e.target.closest(".btn-copy");
+            if (!btn) return;
+            var value = btn.getAttribute("data-copy") || "";
+            if (!value) return;
+            var msg = btn.getAttribute("data-msg") || "Berhasil disalin";
+
+            var ta = null;
+            var copied = false;
+            try {
+              ta = document.createElement("textarea");
+              ta.value = value;
+              ta.setAttribute("readonly", "");
+              ta.style.position = "fixed";
+              ta.style.top = "0";
+              ta.style.left = "0";
+              ta.style.width = "1px";
+              ta.style.height = "1px";
+              ta.style.padding = "0";
+              ta.style.border = "none";
+              ta.style.outline = "none";
+              ta.style.boxShadow = "none";
+              ta.style.background = "transparent";
+              ta.style.opacity = "0";
+              document.body.appendChild(ta);
+              if (/ipad|iphone|ipod/i.test(navigator.userAgent)) {
+                ta.contentEditable = true;
+                ta.readOnly = false;
+                var range = document.createRange();
+                range.selectNodeContents(ta);
+                var sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(range);
+                ta.setSelectionRange(0, value.length);
+              } else {
+                ta.focus();
+                ta.select();
+                ta.setSelectionRange(0, value.length);
+              }
+              copied = document.execCommand("copy");
+            } catch (err) {
+              copied = false;
+            } finally {
+              if (ta && ta.parentNode) ta.parentNode.removeChild(ta);
+            }
+
+            if (copied) {
+              showToast(msg);
+            } else {
+              if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard
+                  .writeText(value)
+                  .then(function () {
+                    showToast(msg);
+                  })
+                  .catch(function () {
+                    showToast("Gagal menyalin, silakan salin manual");
+                  });
+              } else {
+                showToast("Gagal menyalin, silakan salin manual");
+              }
+            }
+          });
+        }
+
+        var petalsStarted = false;
+        function spawnPetal(container) {
+          var p = document.createElement("div");
+          p.className =
+            "petal " + (Math.random() > 0.5 ? "petal-pink" : "petal-sage");
+          var size = 10 + Math.random() * 8;
+          p.style.width = size + "px";
+          p.style.height = size + "px";
+          p.style.left = Math.random() * 100 + "vw";
+          container.appendChild(p);
+          animatePetal(p);
+        }
+        function animatePetal(p) {
+          if (!window.gsap) return;
+          var dur = 9 + Math.random() * 9;
+          var tl = gsap.timeline({
+            onComplete: function () {
+              animatePetal(p);
+            },
+          });
+          tl.set(p, { y: -80, x: 0, opacity: 0 });
+          tl.to(p, { opacity: 0.9, duration: dur * 0.1 }, 0);
+          tl.to(
+            p,
+            {
+              y: window.innerHeight + 120,
+              x: gsap.utils.random(-140, 140),
+              rotation: "+=" + (180 + Math.random() * 360),
+              duration: dur,
+              ease: "none",
+            },
+            0,
+          );
+          tl.to(p, { opacity: 0, duration: dur * 0.15 }, dur * 0.85);
+        }
+        function startPetals() {
+          if (petalsStarted) return;
+          petalsStarted = true;
+          var container = $("petalsContainer");
+          var count = window.innerWidth < 768 ? 7 : 12;
+          for (var i = 0; i < count; i++) {
+            (function (idx) {
+              setTimeout(
+                function () {
+                  spawnPetal(container);
+                },
+                idx * 600 + Math.random() * 400,
+              );
+            })(i);
+          }
+        }
+        function heroIntroAnimation() {
+          if (!window.gsap) return;
+          gsap.fromTo(
+            "#hero .hero-content > *",
+            { y: 44, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 1.1,
+              stagger: 0.14,
+              ease: "power3.out",
+              delay: 0.15,
+            },
+          );
+          gsap.fromTo(
+            ".scroll-indicator",
+            { opacity: 0 },
+            { opacity: 1, duration: 1, delay: 0.9 },
+          );
+        }
+
+        var invitationOpened = false;
+        function initInteractions() {
+          $("btnOpen").addEventListener("click", function () {
+            if (invitationOpened) return;
+            invitationOpened = true;
+            var cover = $("cover");
+            cover.classList.add("closing");
+            document.body.classList.remove("locked");
+            setTimeout(function () {
+              cover.style.display = "none";
+            }, 1000);
+            setTimeout(function () {
+              hamburgerBtn.classList.add("visible");
+            }, 500);
+            if (window.AOS) AOS.refresh();
+            heroIntroAnimation();
+            startPetals();
+            tryPlayMusic();
+          });
+
+          hamburgerBtn.addEventListener("click", function () {
+            if (hamburgerBtn.classList.contains("active")) {
+              closeDrawerUI();
+            } else {
+              openDrawerUI();
+            }
+          });
+          $("drawerOverlay").addEventListener("click", closeDrawerUI);
+
+          var spyTick = false;
+          window.addEventListener(
+            "scroll",
+            function () {
+              if (spyTick) return;
+              spyTick = true;
+              requestAnimationFrame(function () {
+                updateActiveNav();
+                spyTick = false;
+              });
+            },
+            { passive: true },
+          );
+
+          initGiftModal();
+          initLightbox();
+          initRSVP();
+        }
+
+        function init() {
+          return loadRemoteConfig().then(function (remote) {
+            if (remote && typeof remote === "object") {
+              deepMerge(CONFIG, remote);
+            }
+            applyCoupleInfo();
+            renderProfiles();
+            renderEvents();
+            renderStory();
+            renderGallery();
+            renderGiftModal();
+            startCountdown();
+            loadWishes();
+            buildDrawer();
+            initInteractions();
+            initMusic();
+
+            if (window.AOS) {
+              AOS.init({
+                once: true,
+                duration: 850,
+                offset: 60,
+                easing: "ease-out-cubic",
+              });
+            }
+            if (window.gsap && window.ScrollTrigger) {
+              gsap.registerPlugin(ScrollTrigger);
+            }
+            updateActiveNav();
+          });
+        }
+
+        var progress = 0;
+        var progressTimer = setInterval(function () {
+          progress = Math.min(90, progress + 4 + Math.random() * 7);
+          $("loaderPercent").textContent = Math.floor(progress);
+          $("loaderBar").style.width = progress + "%";
+        }, 160);
+
+        var appReady = init().catch(function (e) {
+          console.error("[Init] terjadi kesalahan:", e);
+        });
+        var minDelay = new Promise(function (r) {
+          setTimeout(r, 1400);
+        });
+
+        Promise.all([appReady, minDelay]).then(function () {
+          clearInterval(progressTimer);
+          $("loaderPercent").textContent = "100";
+          $("loaderBar").style.width = "100%";
+          setTimeout(function () {
+            $("loader").classList.add("hidden");
+          }, 450);
+        });
+      })();
+    </script>
+  </body>
+</html>
