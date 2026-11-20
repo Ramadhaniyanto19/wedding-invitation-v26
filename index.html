@@ -3044,7 +3044,7 @@
               done(null);
             }, 6000);
             try {
-              db.ref("v15/" + coupleSlug)
+              db.ref("v26/" + coupleSlug)
                 .once("value")
                 .then(function (snap) {
                   clearTimeout(timer);
@@ -3538,7 +3538,7 @@
             return;
           }
           try {
-            db.ref("v15/" + coupleSlug + "/wishes")
+            db.ref("v26/" + coupleSlug + "/wishes")
               .limitToLast(60)
               .on(
                 "value",
@@ -3602,7 +3602,7 @@
             }
 
             if (db) {
-              db.ref("v15/" + coupleSlug + "/wishes")
+              db.ref("v26/" + coupleSlug + "/wishes")
                 .push(data)
                 .then(function () {
                   showToast("Terima kasih! Doa & ucapan Anda telah terkirim.");
