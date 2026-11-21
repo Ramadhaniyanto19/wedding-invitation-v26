@@ -2342,6 +2342,20 @@
           font-size: 0.58rem;
         }
       }
+
+      /* === HIDDEN SECTIONS (dresscode & doa untuk pengantin) === */
+      /* Dress code card di dalam section events */
+      .dress-code-card {
+        display: none !important;
+      }
+      /* Section "Doa Untuk Pengantin" */
+      #doa-pengantin {
+        display: none !important;
+      }
+      /* Sembunyikan juga tombol navigasi "Doa" di drawer agar tidak menuju section tersembunyi */
+      .drawer-nav-item[data-target="doa-pengantin"] {
+        display: none !important;
+      }
     </style>
   </head>
 
