@@ -1643,7 +1643,7 @@
         return cleaned;
       }
 
-      function copyText(text) {
+      function copyText(text, successMsg) {
         var ta = null;
         var copied = false;
         try {
@@ -1684,12 +1684,12 @@
         }
 
         if (copied) {
-          toast("Berhasil disalin", "success");
+          toast(successMsg || "Berhasil disalin", "success");
         } else {
           if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard
               .writeText(text)
-              .then(() => toast("Berhasil disalin", "success"))
+              .then(() => toast(successMsg || "Berhasil disalin", "success"))
               .catch(() => toast("Gagal menyalin", "error"));
           } else {
             toast("Gagal menyalin", "error");
@@ -2249,7 +2249,7 @@ Wassalamualaikum Wr. Wb."></textarea>
             <td>
               <div style="display:flex; gap:4px;">
                 <a href="javascript:void(0)" class="wa-btn" onclick="shareWA('${k}')"><span class="iconify" data-icon="lucide:message-circle" style="font-size:.8rem"></span>Kirim</a>
-                <button class="btn-icon" style="width:26px;height:26px" data-copy-link="${esc(link)}" onclick="copyText(this.dataset.copyLink)"><span class="iconify" data-icon="lucide:copy" style="font-size:.7rem"></span></button>
+                <button class="btn-icon" style="width:26px;height:26px" onclick="copyInviteMessage('${k}')"><span class="iconify" data-icon="lucide:copy" style="font-size:.7rem"></span></button>
                 <button class="btn-icon red" onclick="deleteGuest('${k}')"><span class="iconify" data-icon="lucide:trash-2"></span></button>
               </div>
             </td>
@@ -2494,9 +2494,11 @@ Wassalamualaikum Wr. Wb."></textarea>
         );
       };
 
-      window.shareWA = function (key) {
+      // Shared message builder — used by both shareWA (Kirim) and copyInviteMessage (Copy)
+      // so the WhatsApp message produced is always identical between the two actions.
+      function buildInviteMessage(key) {
         const d = state.guest[key];
-        if (!d) return;
+        if (!d) return "";
         const slug = d.slug || makeSlug(d.name);
         const link = `${getInviteBaseURL()}?couple=${currentSlug}&to=${slug}`;
 
@@ -2529,11 +2531,32 @@ Wassalamualaikum Wr. Wb."></textarea>
           .replace(/\[Wanita\]/g, brideName)
           .replace(/\[Tanggal\]/g, weddingDate || "-");
 
+        return msg;
+      }
+
+      window.shareWA = function (key) {
+        const d = state.guest[key];
+        if (!d) return;
+        const msg = buildInviteMessage(key);
+        if (!msg) return;
+
         const phone = formatPhone(d.phone || "");
         let url = phone
           ? `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(msg)}`
           : `https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`;
         window.open(url, "_blank");
+      };
+
+      // Copy the entire personalized WhatsApp invitation message to clipboard.
+      // Uses the same buildInviteMessage() as the Kirim button so the copied
+      // text is always identical to what Kirim would open in WhatsApp.
+      window.copyInviteMessage = function (key) {
+        const msg = buildInviteMessage(key);
+        if (!msg) {
+          toast("Data tamu tidak ditemukan", "error");
+          return;
+        }
+        copyText(msg, "Pesan undangan berhasil disalin");
       };
 
       // UPDATE: Synchronous loop to bypass popup blocker as much as possible
